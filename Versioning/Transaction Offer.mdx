@@ -351,3 +351,69 @@ They control how and when the bank notifies customers about the offer.
 | **Channel — SMS / Push / Email** | **Allowed** | Allows the bank to update its communication strategy. |
 
 ---
+# How Transactional Offer Versioning Works
+
+## Atomic Cutover
+
+Transactional Offers have **no running counters**. Each transaction is evaluated independently.
+
+This allows V1 to switch off and V2 to switch on cleanly.
+
+### Step 1 — Edit a Live Offer
+
+The bank clicks **Edit** on a live offer from the **Manage Offers** page.
+
+### Step 2 — Create V2
+
+The system creates **V2 as an exact clone of V1**.
+
+V1 remains fully active while V2 is being configured.
+
+All enrolled customers continue earning under the V1 rules.
+
+### Step 3 — Edit V2
+
+The bank makes the required changes in V2.
+
+The **diff view** displays:
+
+- **Green** — Added
+- **Red** — Removed
+
+Only fields allowed by the versioning rules can be edited.
+
+Locked fields are greyed out, with the reason for the restriction displayed.
+
+### Step 4 — Review V2 Summary
+
+The system automatically generates the **V2 Summary**.
+
+The summary includes:
+
+- All Same Cycle changes.
+- For Transactional Offers, there are no cycles, so all changes apply on approval as a **V1.1 minor version**.
+- A warning if a field is both added and removed within the same version.
+
+### Step 5 — Apply Changes
+
+Before submitting V2, the bank can choose how the changes are applied.
+
+#### Option 1 — Apply All Changes Together
+
+All changes are applied together when V2 is approved.
+
+**Recommended for Transactional Offers.**
+
+#### Option 2 — Split Changes
+
+Some changes can be applied immediately while others are applied in the next cycle.
+
+This option is relevant to **Milestone Offers**.
+
+### Step 6 — Maker-Checker Approval
+
+Once V2 completes the approval process:
+
+- V2 goes live.
+- V1 is archived.
+- A full audit trail is maintained.
