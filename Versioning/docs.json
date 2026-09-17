@@ -1,0 +1,15 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "name": "Offer Versioning",
+  "navigation": [
+    {
+      "group": "Versioning",
+      "pages": [
+        "Introduction",
+        "Transaction Offer",
+        "Milestone Offer",
+        "Display Only Offer"
+      ]
+    }
+  ]
+}
