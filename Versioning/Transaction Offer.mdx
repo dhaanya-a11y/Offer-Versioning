@@ -1,1 +1,472 @@
+---
+title: Transactional Offer Versioning
+description: Understand versioning rules and configuration changes for Transactional Offers.
+---
 
+# Transactional Offer Versioning
+
+## Why Versioning Is Needed
+
+Once an offer goes live, the **Setup Offer** section is locked. The bank cannot modify the configuration after go-live, including correcting a missed Merchant Category Code (MCC).
+
+The current workaround is to duplicate the entire offer and configure it again.
+
+### Scenario — Reducing the Reward Rate
+
+A bank has launched a Transactional Offer that rewards customers with **5 reward points per transaction**. After monitoring the campaign, the bank decides to reduce the reward rate to **3 points** to control the cost of the offer.
+
+Without versioning, the bank would need to duplicate the offer and configure the new offer again. The new offer would then need to be managed separately from the existing offer.
+
+With versioning, the bank can create **V2** and update the reward value from **5 points to 3 points**. Once V2 is approved, the new reward value applies to subsequent transactions while the existing offer configuration and customer enrollments are retained.
+
+**Why Versioning Helps**
+
+Versioning allows the bank to make configuration changes through a controlled new version without recreating the offer.
+
+---
+
+## The Solution — Live Offer Versioning
+
+Live Offer Versioning allows the bank to create a new version of an existing live offer.
+
+- **V1** remains active while **V2** is being configured.
+- The bank can make changes to the fields that are allowed for versioning.
+- Once V2 is approved, it replaces V1.
+- Existing customer enrollments are retained.
+- The bank does not need to duplicate and reconfigure the entire offer.
+
+The key question is:
+
+> **Which fields can change in V2, and which cannot?**
+
+This document defines the versioning rules for **Transactional Offers**.
+
+---
+
+# Transactional Offer
+
+A **Transactional Offer** is an offer where eligibility and the reward outcome are evaluated based on a transaction.
+
+For a Transactional Offer, versioning supports changes to specific **offer, eligibility, transaction, reward, usage-limit, narration, and display configurations**.
+
+Configurations that represent the underlying offer structure or restricted processing behaviour cannot be modified through versioning. :contentReference[oaicite:1]{index=1}
+
+## Versioning Classification
+
+Each configuration is classified based on whether it can be modified when creating a new version.
+
+| Classification | Definition |
+| --- | --- |
+| **Allowed** | The field can be modified in a new version. |
+| **Not Allowed** | The field cannot be modified through versioning and must remain unchanged. |
+
+---
+
+# Stage 1 — Offer Type
+
+| Field | Decision | Reason |
+| --- | --- | --- |
+| **Offer Type** | **Not Allowed** | Each offer type, such as Transaction, Milestone, Gamified, and EMI, uses a different processing engine. The data schema, calculation logic, and enrollment model are fundamentally different. Changing the offer type is equivalent to creating a new offer from scratch. |
+
+---
+
+# Stage 2 — Outcome Type
+
+| Field | Decision | Reason |
+| --- | --- | --- |
+| **Outcome Type** | **Not Allowed** | Each outcome type, such as Cashback, Reward, and Voucher, uses a different ledger and disbursement mechanism. Cashback credits the statement, Reward points go to a loyalty ledger, and Vouchers generate external codes. This is a core structural change. |
+
+---
+
+# Stage 3 — Offer Scope
+
+Offer Scope contains the basic configuration that defines the applicability context of the offer.
+
+| Field / Change | Decision | Reason |
+| --- | --- | --- |
+| **Eligibility Level** | **Not Allowed** | All enrollment records are built on this setting, such as Account Level or Customer Level. Switching the setting invalidates existing enrollment data. |
+| **Issuer** | **Not Allowed** | Ledger accounts, compliance rules, and funding sources are different across issuers. |
+| **Program Type** | **Not Allowed** | Defines the card product category and the associated transaction processing pipeline. |
+| **Program — Remove Existing** | **Not Allowed** | Customers on the removed program are actively enrolled and earning. Removing the program cuts their access immediately. |
+| **Offer Name** | **Allowed** | Non-financial text that can be updated to correct a typo or update the offer name. |
+| **Offer Description** | **Allowed** | Non-financial descriptive information that can be updated to reflect changes. |
+| **Offer Duration — Extend** | **Allowed** | Gives customers more time with the offer. |
+| **Offer Duration — Shorten** | **Allowed with confirmation** | Ends the offer earlier. A confirmation is shown because enrolled customers will have less time. |
+| **Program — Add New** | **Allowed** | Allows an additional program to be associated with the existing offer. More customers become eligible without affecting existing customers. |
+
+---
+
+# Stage 4.1 — User Base
+
+The **User Base** defines **who gets the offer and how they get enrolled**.
+
+This is the most complex section because the customer enrollment model cannot be changed freely after the offer is live.
+
+## Static and Dynamic User Base
+
+Static Base and Dynamic Config use fundamentally different enrollment mechanisms.
+
+- **Static** stores a fixed list of account IDs.
+- **Dynamic** stores Smart Tag rules that evaluate in real time.
+
+The underlying data schemas are different. Switching between these configurations invalidates existing enrollment records.
+
+| Change | Decision | Reason |
+| --- | --- | --- |
+| **Static → Dynamic** | **Not Allowed** | Changes the enrollment engine and underlying data schema. |
+| **Dynamic → Static** | **Not Allowed** | Changes the enrollment engine and underlying data schema. |
+
+For Transaction Offers, creating a new offer has zero customer impact because there are no counters to lose. Therefore, changing the enrollment model should be handled through a new offer.
+
+### Why Static → Dynamic Is Not Allowed
+
+1. **Different systems** — Static uses a fixed list, while Dynamic uses a rule engine. They cannot be swapped mid-offer.
+2. **No accountability** — After switching, it becomes unclear who is enrolled and why.
+3. **Not a version** — Changing the audience model represents a new offer rather than a versioning change.
+
+---
+
+## Static Base
+
+| Change | Decision | Reason |
+| --- | --- | --- |
+| **Add Members to List** | **Allowed** | More customers get the offer. No existing member is affected. |
+| **Remove Members from List** | **Not Allowed** | These customers are actively enrolled and earning on every transaction. Removing them cuts their access. |
+
+---
+
+## Dynamic Config — V1 Uses Opt-In
+
+**Opt-In** means customers voluntarily choose to join the offer. They see the offer, opt in, and the Smart Tag is attached to their profile.
+
+| Change | Decision | Reason |
+| --- | --- | --- |
+| **Add Smart Tag Value** | **Allowed** | More customer segments can see and opt in. |
+| **Remove Smart Tag Value** | **Not Allowed** | Customers with the tag have actively opted in. Removing the tag disqualifies them from an offer they chose to join. |
+| **Switch to Smart Tag Attachment** | **Not Allowed** | Opt-In and Smart Tag Attachment are fundamentally different enrollment mechanisms. Switching changes the customer's relationship with the offer. |
+
+---
+
+## Dynamic Config — V1 Uses Smart Tag Attachment
+
+**Smart Tag Attachment** means the system automatically enrolls customers when a tag is attached to their profile. The customer does not choose to join.
+
+| Change | Decision | Reason |
+| --- | --- | --- |
+| **Add Smart Tag Value** | **Allowed** | More customers get auto-enrolled. |
+| **Remove Smart Tag Value** | **Not Allowed** | Auto-enrolled customers would lose access without warning. |
+| **Switch to Opt-In** | **Not Allowed** | Changes the enrollment mechanism. Auto-enrolled customers would need to manually opt in. |
+| **Offer Activation Date** | **Not Allowed** | Defines when the offer activates after tag attachment. Changing it affects already-enrolled timelines. |
+| **Subscription Duration** | **Not Allowed** | Defines how long each customer stays enrolled. Changing it alters the commitment for enrolled customers. |
+| **Subscription Cut-Off Date** | **Not Allowed** | Defines the deadline for new enrollments. Changing it affects the enrollment pipeline. |
+
+---
+
+## Eligibility Criteria
+
+Eligibility Criteria applies to both **Static** and **Dynamic** configurations.
+
+Eligibility criteria such as **Smart Tag, KYC Status, Accounts, Birthdate**, and others filter which customers qualify. These represent the bank's operational targeting decisions.
+
+| Change | Decision | Reason |
+| --- | --- | --- |
+| **Add New Criteria** | **Allowed** | Allows the bank to define the target audience. The next transaction is evaluated under the new rules. |
+| **Remove Existing Criteria** | **Allowed** | Opens eligibility so more customers can qualify. |
+| **Edit Criteria Value** | **Allowed** | Refines the target audience. The next transaction is evaluated under the new value. |
+
+> **Open Question:** Adding a new criterion restricts eligibility because more filters mean fewer customers qualify. Some currently active customers may not pass the new filter. Should the system show a confirmation popup when adding a criterion in V2?
+
+> **Decision Point:** Given the complexity of the User Base rules, should any User Base changes be allowed in V2, or should the entire User Base section be locked and require a new offer for enrollment changes? Keeping it partially open provides the ability to add members or Smart Tag values, while the other enrollment-model changes remain locked.
+
+---
+
+# Stage 4.2 — Transaction Eligibility
+
+**Transaction Eligibility** defines which transactions qualify for the offer.
+
+It includes:
+
+- MCC
+- MID
+- TID
+- POS Entry Mode
+- Transaction Value
+- Transaction Type
+- Sovereignty Indicator
+- Transaction Code
+- Date for Processing
+
+## Scenario — Missed MCC
+
+A bank launches a Transactional Offer and later realizes that **MCC 5912 (Drug Stores)** was missed. **10,000 customers** are already enrolled.
+
+Without versioning, the bank would need to:
+
+- Duplicate the entire offer.
+- Reconfigure the offer, requiring **2–4 hours of operations time**.
+- Lose the **10,000 customer enrollments** on the new offer.
+- Create a coverage gap where qualifying Drug Store transactions earn nothing.
+
+With versioning, the bank can add **MCC 5912** in V2. Once V2 is approved, the next qualifying Drug Store transaction earns the configured reward.
+
+No duplication or re-enrollment is required.
+
+---
+
+## Removing Transaction Attributes
+
+If the bank removes **MCC 5411 (Grocery)**, the next grocery transaction simply does not earn.
+
+For Transactional Offers, there is **no counter or accumulated progress**. Each transaction is evaluated independently.
+
+The customer was never told that MCC 5411 is included; they see **"earn on grocery"** on the app.
+
+---
+
+## Transaction Eligibility Changes
+
+All fields in this section are editable in V2.
+
+| Field / Change | Decision | Reason |
+| --- | --- | --- |
+| **Add MCC / MID / TID** | **Allowed** | More transactions qualify. No customer is affected. |
+| **Remove MCC / MID / TID** | **Allowed** | There is no counter or accumulated progress. The next transaction at the removed MCC does not earn. |
+| **Add POS Entry Mode** | **Allowed** | More ways to transact qualify. |
+| **Remove POS Entry Mode** | **Allowed** | The next transaction through the removed mode does not earn. |
+| **Add Transaction Type** | **Allowed** | More activity types qualify. |
+| **Remove Transaction Type** | **Allowed** | The next transaction of the removed type does not earn. |
+| **Add Sovereignty Indicator** | **Allowed** | Adds another transaction classification. |
+| **Remove Sovereignty Indicator** | **Allowed** | Represents the bank's operational decision. |
+| **Add Transaction Code** | **Allowed** | More transaction codes qualify. |
+| **Remove Transaction Code** | **Allowed** | Represents the bank's operational decision. |
+| **Transaction Value — Raise Minimum** | **Allowed** | Represents the bank's financial control. |
+| **Transaction Value — Lower Minimum** | **Allowed** | Allows more transactions to qualify. |
+| **Date for Processing** | **Allowed** | Each transaction is independent and no accumulation window is affected. |
+
+> **Open Question:** When an MCC is removed, the Display Elements may still say "Earn on Grocery." Should the system remind the bank to update Display Elements when a transaction attribute is removed?
+
+> **Open Question:** Transaction attributes can be configured as **Allowed** or **Not Allowed** lists. In V2, should the bank be able to move an MCC between these lists, such as moving MCC 5411 from Allowed to Not Allowed? This would reverse the treatment of that MCC for all future transactions.
+
+> **Decision Point:** All Transaction Eligibility changes are currently allowed because Transactional Offers have no running counters and each transaction is evaluated independently. Should this remain fully open, or should removal require confirmation?
+
+---
+
+# Stage 4.3 — Offer Calculation Rule
+
+The **Rule Type** defines the underlying method used to calculate the offer outcome.
+
+| Field / Change | Decision | Reason |
+| --- | --- | --- |
+| **Rule Type Change — Flat → Slab, Percentage → Flat, etc.** | **Not Allowed** | Flat, Slab, and Percentage use different calculation strategies, computation engines, and data schemas. Changing the rule type is equivalent to creating a new calculation from scratch. |
+| **Raise Reward Value — for example, 3 → 5 points** | **Allowed** | The customer receives more per transaction. |
+| **Lower Reward Value — for example, 5 → 3 points** | **Allowed** | Each transaction is independent. The customer sees the current rate, and the next transaction uses the new value. |
+| **Change "Per X Spent" Base — for example, 100 → 50** | **Allowed** | Changes how frequently rewards are generated. |
+| **Skip Reward Point Capping — Turn ON** | **Allowed** | Allows the offer to operate outside existing program-level caps when required for a specific campaign. |
+| **Skip Reward Point Capping — Turn OFF** | **Allowed** | Allows the bank to bring the offer under program-level caps when required to control cost. |
+| **Allow Reversal — Enable** | **Allowed** | Allows the bank to recover points on refunded transactions. |
+| **Allow Reversal — Disable** | **Allowed** | Allows the bank to let customers retain points on refunds. |
+
+> **Open Question:** Lowering the reward value is safe for Transactional Offers because there is no running counter, but it changes what the customer sees on the offer page. Should the system show a confirmation when reducing the reward rate?
+
+---
+
+# Stage 4.4 — Usage Limits
+
+**Usage Limits** define how many times or how much a customer can earn within a time window.
+
+## Why Usage Limit Changes Are Allowed
+
+Usage Limits act as the bank's **financial control lever** for a specific offer.
+
+Banks may need to adjust these limits based on budget and performance data.
+
+For Transactional Offers, there are **no running counters**. The limit defines the applicable cap going forward from V2 go-live.
+
+Blocking these changes would require the bank to create a new offer for every cap adjustment.
+
+| Field / Change | Decision | Reason |
+| --- | --- | --- |
+| **Duration — Month → Quarter** | **Allowed** | No accumulation counter is affected. The cap window changes going forward. |
+| **Raise Count — for example, 5 → 10** | **Allowed** | Allows the customer to earn more times. |
+| **Lower Count — for example, 10 → 5** | **Allowed** | Allows the bank to control costs. |
+| **Raise Amount — for example, 500 → 1000** | **Allowed** | Allows the customer to earn more value. |
+| **Lower Amount — for example, 1000 → 500** | **Allowed** | Allows the bank to control costs. |
+| **Change Condition Type — Count / Amount / Both** | **Allowed** | Changes how the limit is measured. |
+| **Add New Limit Row** | **Allowed** | Adds an additional usage-limit configuration. |
+| **Remove Existing Limit Row** | **Allowed** | Removes an existing usage-limit configuration. |
+
+> **Open Question:** When a cap is lowered and a customer has already exceeded the new lower limit in the current window—for example, the customer has earned 7 times and the new cap is 5—what should the system do?
+
+> **Option A:** Let the customer keep what they have earned but block further earning.
+
+> **Option B:** Apply the new cap from the next window reset.
+
+---
+
+# Stage 4.5 — Posting
+
+**Posting** is the reward delivery infrastructure. It controls when and how earned rewards reach the customer's account.
+
+## Posting Enable / Disable
+
+The **Posting Enable / Disable** toggle is **Not Allowed** in V2.
+
+Posting is configured as **ON or OFF at offer creation**.
+
+Turning Posting OFF mid-offer means rewards are calculated but never delivered, creating an unclear state for both the bank and the customer.
+
+Turning Posting ON mid-offer raises questions about whether previously calculated rewards should be backfilled.
+
+Therefore, the Posting toggle cannot be changed through versioning.
+
+---
+
+## Posting Configuration
+
+If Posting is already enabled, the following configurations apply:
+
+| Field / Change | Decision | Reason |
+| --- | --- | --- |
+| **Posting Eligibility — Account Status, Account Smart Tag, Account Block Code** | **Not Allowed** | Only adding filters would be possible, while removing V1 filters is not safe. The limited value of add-only changes does not justify the complexity. |
+| **Posting Timing — Schedule / Post Immediately** | **Not Allowed** | Changes when the customer receives the reward. |
+| **Posting Frequency — Every Transaction / Subscription Ends** | **Not Allowed** | Changes how frequently rewards are posted. |
+| **Reward Points Expiry — X Days** | **Not Allowed** | Changes how long posted rewards remain valid and can create inconsistency between V1 and V2 posted rewards. |
+| **Posting Narration** | **Allowed** | Non-financial text displayed on the customer's statement. |
+| **Reversal Narration** | **Allowed** | Non-financial text displayed when points are reversed. |
+
+Posting is configured once at offer creation.
+
+If the setup is incorrect, the correct path is to **expire the offer and create a new one**.
+
+---
+
+# Stage 5 — Display Elements
+
+All **Display Elements** are non-financial.
+
+They control what the customer sees in the app, including titles, descriptions, images, colors, and layouts.
+
+Display Elements do not affect reward calculation, enrollment, or posting logic.
+
+| Field / Change | Decision | Reason |
+| --- | --- | --- |
+| **Labels, Display Title, Description** | **Allowed** | Controls visual and descriptive content. |
+| **Display Order, Color** | **Allowed** | Controls visual presentation and branding. |
+| **Offer / Merchant Logo, Background** | **Allowed** | Controls visual branding. |
+| **Section Details, CTA Button, Link** | **Allowed** | Controls the offer detail page content. |
+| **Advanced Settings** | **Allowed** | Controls display configuration. |
+
+---
+
+# Stage 6 — Communication
+
+All **Communication** configurations are non-financial.
+
+They control how and when the bank notifies customers about the offer.
+
+| Field / Change | Decision | Reason |
+| --- | --- | --- |
+| **Event Triggers** | **Allowed** | Defines which events trigger notifications. |
+| **Message Content** | **Allowed** | Allows the bank to update customer messaging. |
+| **Channel — SMS / Push / Email** | **Allowed** | Allows the bank to update its communication strategy. |
+
+---
+
+# How Transactional Offer Versioning Works
+
+## Atomic Cutover
+
+Transactional Offers have **no running counters**. Each transaction is evaluated independently.
+
+This allows V1 to switch off and V2 to switch on cleanly.
+
+### Step 1 — Edit a Live Offer
+
+The bank clicks **Edit** on a live offer from the **Manage Offers** page.
+
+### Step 2 — Create V2
+
+The system creates **V2 as an exact clone of V1**.
+
+V1 remains fully active while V2 is being configured.
+
+All enrolled customers continue earning under the V1 rules.
+
+### Step 3 — Edit V2
+
+The bank makes the required changes in V2.
+
+The **diff view** displays:
+
+- **Green** — Added
+- **Red** — Removed
+
+Only fields allowed by the versioning rules can be edited.
+
+Locked fields are greyed out, with the reason for the restriction displayed.
+
+### Step 4 — Review V2 Summary
+
+The system automatically generates the **V2 Summary**.
+
+The summary includes:
+
+- All Same Cycle changes.
+- For Transactional Offers, there are no cycles, so all changes apply on approval as a **V1.1 minor version**.
+- A warning if a field is both added and removed within the same version.
+
+### Step 5 — Apply Changes
+
+Before submitting V2, the bank can choose how the changes are applied.
+
+#### Option 1 — Apply All Changes Together
+
+All changes are applied together when V2 is approved.
+
+**Recommended for Transactional Offers.**
+
+#### Option 2 — Split Changes
+
+Some changes can be applied immediately while others are applied in the next cycle.
+
+This option is relevant to **Milestone Offers**.
+
+### Step 6 — Maker-Checker Approval
+
+Once V2 completes the approval process:
+
+- V2 goes live.
+- V1 is archived.
+- A full audit trail is maintained.
+
+---
+
+# What Happens at Cutover?
+
+When V2 becomes effective:
+
+1. **V1 is archived immediately.**
+2. **V2 becomes the active offer.**
+3. The very next transaction for an enrolled customer is evaluated using the V2 rules.
+4. There is **no coverage gap**.
+5. There is **no overlap** between V1 and V2.
+6. **No re-enrollment is required.**
+7. All enrollment records **carry over from V1 to V2 automatically**.
+
+The result is a controlled transition from V1 to V2 without recreating the offer or losing existing customer enrollments.
+
+---
+
+## Open Questions
+
+The following points require product decisions and are **not defined as final versioning rules**:
+
+1. Should the entire **User Base** section be locked in V2 because of the complexity of enrollment changes?
+2. Should adding a new **Eligibility Criterion** show a confirmation popup?
+3. Should removing an **MCC** remind the bank to update the Display Elements?
+4. Should removing a **Transaction Eligibility attribute** require confirmation?
+5. Should the bank be able to move an MCC between **Allowed** and **Not Allowed** lists in V2?
+6. Should lowering the **Reward Value** require confirmation?
+7. When a **Usage Limit** is lowered below a customer's current usage, should the new limit apply immediately or from the next window reset?
+
+> **Note:** These are open questions and decision points. They should not be treated as implemented product behavior until a final decision is made.
