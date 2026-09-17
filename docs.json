@@ -13,9 +13,9 @@
         "group": "Versioning",
         "pages": [
           "Versioning/Introduction",
-          "Versioning/Transaction Offer",
-          "Versioning/Milestone Offer",
-          "Versioning/Display Only Offer"
+          "Versioning/transaction-offer",
+          "Versioning/milestone-offer",
+          "Versioning/display-only-offer"
         ]
       }
     ]
