@@ -47,7 +47,7 @@ A **Transactional Offer** is an offer where eligibility and the reward outcome a
 
 For a Transactional Offer, versioning supports changes to specific **offer, eligibility, transaction, reward, usage-limit, narration, and display configurations**.
 
-Configurations that represent the underlying offer structure or restricted processing behaviour cannot be modified through versioning. :contentReference[oaicite:1]{index=1}
+Configurations that represent the underlying offer structure or restricted processing behaviour cannot be modified through versioning. 
 
 ## Versioning Classification
 
@@ -172,10 +172,6 @@ Eligibility criteria such as **Smart Tag, KYC Status, Accounts, Birthdate**, and
 | **Remove Existing Criteria** | **Allowed** | Opens eligibility so more customers can qualify. |
 | **Edit Criteria Value** | **Allowed** | Refines the target audience. The next transaction is evaluated under the new value. |
 
-> **Open Question:** Adding a new criterion restricts eligibility because more filters mean fewer customers qualify. Some currently active customers may not pass the new filter. Should the system show a confirmation popup when adding a criterion in V2?
-
-> **Decision Point:** Given the complexity of the User Base rules, should any User Base changes be allowed in V2, or should the entire User Base section be locked and require a new offer for enrollment changes? Keeping it partially open provides the ability to add members or Smart Tag values, while the other enrollment-model changes remain locked.
-
 ---
 
 # Stage 4.2 — Transaction Eligibility
@@ -241,12 +237,6 @@ All fields in this section are editable in V2.
 | **Transaction Value — Lower Minimum** | **Allowed** | Allows more transactions to qualify. |
 | **Date for Processing** | **Allowed** | Each transaction is independent and no accumulation window is affected. |
 
-> **Open Question:** When an MCC is removed, the Display Elements may still say "Earn on Grocery." Should the system remind the bank to update Display Elements when a transaction attribute is removed?
-
-> **Open Question:** Transaction attributes can be configured as **Allowed** or **Not Allowed** lists. In V2, should the bank be able to move an MCC between these lists, such as moving MCC 5411 from Allowed to Not Allowed? This would reverse the treatment of that MCC for all future transactions.
-
-> **Decision Point:** All Transaction Eligibility changes are currently allowed because Transactional Offers have no running counters and each transaction is evaluated independently. Should this remain fully open, or should removal require confirmation?
-
 ---
 
 # Stage 4.3 — Offer Calculation Rule
@@ -263,8 +253,6 @@ The **Rule Type** defines the underlying method used to calculate the offer outc
 | **Skip Reward Point Capping — Turn OFF** | **Allowed** | Allows the bank to bring the offer under program-level caps when required to control cost. |
 | **Allow Reversal — Enable** | **Allowed** | Allows the bank to recover points on refunded transactions. |
 | **Allow Reversal — Disable** | **Allowed** | Allows the bank to let customers retain points on refunds. |
-
-> **Open Question:** Lowering the reward value is safe for Transactional Offers because there is no running counter, but it changes what the customer sees on the offer page. Should the system show a confirmation when reducing the reward rate?
 
 ---
 
@@ -292,12 +280,6 @@ Blocking these changes would require the bank to create a new offer for every ca
 | **Change Condition Type — Count / Amount / Both** | **Allowed** | Changes how the limit is measured. |
 | **Add New Limit Row** | **Allowed** | Adds an additional usage-limit configuration. |
 | **Remove Existing Limit Row** | **Allowed** | Removes an existing usage-limit configuration. |
-
-> **Open Question:** When a cap is lowered and a customer has already exceeded the new lower limit in the current window—for example, the customer has earned 7 times and the new cap is 5—what should the system do?
-
-> **Option A:** Let the customer keep what they have earned but block further earning.
-
-> **Option B:** Apply the new cap from the next window reset.
 
 ---
 
@@ -369,73 +351,3 @@ They control how and when the bank notifies customers about the offer.
 | **Channel — SMS / Push / Email** | **Allowed** | Allows the bank to update its communication strategy. |
 
 ---
-
-# How Transactional Offer Versioning Works
-
-## Atomic Cutover
-
-Transactional Offers have **no running counters**. Each transaction is evaluated independently.
-
-This allows V1 to switch off and V2 to switch on cleanly.
-
-### Step 1 — Edit a Live Offer
-
-The bank clicks **Edit** on a live offer from the **Manage Offers** page.
-
-### Step 2 — Create V2
-
-The system creates **V2 as an exact clone of V1**.
-
-V1 remains fully active while V2 is being configured.
-
-All enrolled customers continue earning under the V1 rules.
-
-### Step 3 — Edit V2
-
-The bank makes the required changes in V2.
-
-The **diff view** displays:
-
-- **Green** — Added
-- **Red** — Removed
-
-Only fields allowed by the versioning rules can be edited.
-
-Locked fields are greyed out, with the reason for the restriction displayed.
-
-### Step 4 — Review V2 Summary
-
-The system automatically generates the **V2 Summary**.
-
-The summary includes:
-
-- All Same Cycle changes.
-- For Transactional Offers, there are no cycles, so all changes apply on approval as a **V1.1 minor version**.
-- A warning if a field is both added and removed within the same version.
-
-### Step 5 — Apply Changes
-
-Before submitting V2, the bank can choose how the changes are applied.
-
-#### Option 1 — Apply All Changes Together
-
-All changes are applied together when V2 is approved.
-
-**Recommended for Transactional Offers.**
-
-#### Option 2 — Split Changes
-
-Some changes can be applied immediately while others are applied in the next cycle.
-
-This option is relevant to **Milestone Offers**.
-
-### Step 6 — Maker-Checker Approval
-
-Once V2 completes the approval process:
-
-- V2 goes live.
-- V1 is archived.
-- A full audit trail is maintained.
-
----
-
