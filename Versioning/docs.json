@@ -1,15 +1,18 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "name": "Offer Versioning",
-  "navigation": [
-    {
-      "group": "Versioning",
-      "pages": [
-        "Versioning/Introduction",
-        "Versioning/Transaction Offer",
-        "Versioning/Milestone Offer",
-        "Versioning/Display Only Offer"
-      ]
-    }
-  ]
+  "theme": "mint",
+  "navigation": {
+    "groups": [
+      {
+        "group": "Versioning",
+        "pages": [
+          "Versioning/Introduction",
+          "Versioning/Transaction Offer",
+          "Versioning/Milestone Offer",
+          "Versioning/Display Only Offer"
+        ]
+      }
+    ]
+  }
 }
