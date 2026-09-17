@@ -47,10 +47,38 @@ Configurations that represent the underlying offer structure or restricted proce
 
 <Card title="Versioning Classification">
 
-| Classification | Definition |
-| --- | --- |
-| **Allowed** | The field can be modified in a new version. |
-| **Not Allowed** | The field cannot be modified through versioning and must remain unchanged. |
+<table style={{ width: "100%", borderCollapse: "collapse" }}>
+  <thead>
+    <tr>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>
+        Classification
+      </th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>
+        Definition
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>
+        <Badge color="green">Allowed</Badge>
+      </td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>
+        The field can be modified in a new version.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>
+        <Badge color="red">Not Allowed</Badge>
+      </td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>
+        The field cannot be modified through versioning and must remain unchanged.
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 </Card>
 
