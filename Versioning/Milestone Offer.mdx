@@ -1,1 +1,300 @@
+---
+title: Milestone Offer
+description: Understand versioning rules and configuration changes for Milestone Offers.
+---
+
+# Milestone Offer — Versioning
+
+For a **Milestone Offer**, versioning is particularly important because customers may already have accumulated progress towards a milestone during an active cycle. Therefore, changes that affect milestone evaluation or the customer’s reward promise must be handled carefully so that existing customer progress is not impacted.
+
+The Transactional Offer versioning rules apply to the common configurations. The sections below cover only the configurations that are specific to or different for a Milestone Offer.
+
+### Key Components
+
+| Component | Description |
+|---|---|
+| **Offer Duration** | Defines the overall period during which the offer is active. |
+| **Cycle Type** | Defines how the offer duration is divided into repeating cycles. |
+| **Number of Cycles** | Defines how many cycles are available within the offer duration. |
+| **Threshold** | Defines the target that the customer must achieve during a cycle. |
+| **Reward** | Defines what the customer receives after reaching the threshold. |
+
+### Cycle Types
+
+Milestone Offers can use two categories of cycle types:
+
+- **Calendar-based:** Day, Week, Calendar Month, Quarter, Calendar Year, and Custom.
+- **Per-customer:** Billing Month, Anniversary Year, and Account Creation Date.
+
+## Why Milestone Offer Versioning Is Needed
+
+Once a Milestone Offer goes live, the **Setup Offer** section is locked. The bank cannot modify the configuration after go-live.
+
+The current workaround is to duplicate the entire offer and configure it again.
+
+Versioning allows the bank to create **V2** of the live offer while V1 remains active. Changes can then be applied according to their impact on the customer's current cycle and milestone progress.
+
+## Scenario — Extending the Milestone Offer
+
+A bank launches a Milestone Offer where customers can **spend ₹5,000 per month and receive 300 reward points**. The offer is initially configured for **3 cycles**.
+
+After the offer goes live, the bank decides to extend the campaign by adding **2 more cycles** so customers have additional opportunities to participate.
+
+Without versioning, the bank would need to create a new offer and configure it again.
+
+With versioning, the bank can create **V2** and increase the number of cycles from **3 to 5**. The existing cycle continues without disruption, and the additional cycles become available from the next cycle.
+
+## Calendar-Based and Per-Customer Cycles
+
+The effect of versioning depends on the type of cycle used by the offer.
+
+### Calendar-Based Cycles
+
+Calendar-based cycles have the same cycle boundary for all customers.
+
+Examples include:
+
+- Day
+- Week
+- Calendar Month
+- Quarter
+- Calendar Year
+- Custom
+
+### Per-Customer Cycles
+
+Per-customer cycles can have different cycle boundaries for different customers.
+
+Examples include:
+
+- Billing Month
+- Anniversary Year
+- Account Creation Date
+
+Because customers can have different cycle boundaries, versioning changes may result in V1 and V2 applying at different times for different customers.
+
+## Current Cycle vs Next Cycle
+
+When V2 is created, each allowed change must be classified based on when it should take effect.
+
+The general approach is:
+
+- **Adding** members, MCCs, tags, or criteria → **Current Cycle**
+- **Removing** members, MCCs, tags, or criteria → **Next Cycle**
+- **Customer promises** such as threshold, reward, and caps → **Next Cycle**
+- **Infrastructure** such as posting and delivery → **Locked**
+- **Non-financial** configurations such as display, communication, and offer name → **Immediate**
+
+This approach allows changes that expand eligibility to take effect sooner while protecting customers from mid-cycle changes that could affect their existing progress or offer promise.
+
+# Stage 1 — Offer Type
+
+| Field | Decision | Reason |
+|---|---|---|
+| **Offer Type** | **Not Allowed** | Different offer types use different processing engines. Milestone and Transactional Offers use different counter and calculation logic. |
+
+# Stage 2 — Outcome Type
+
+| Field | Decision | Reason |
+|---|---|---|
+| **Outcome Type** | **Not Allowed** | Different outcome types use different ledger and disbursement mechanisms. |
+
+# Stage 3 — Offer Scope
+
+Offer Scope contains the basic configuration that defines the applicability context of the offer.
+
+| Field / Change | Decision | Cycle | Reason |
+|---|---|---|---|
+| **Eligibility Level** | **Not Allowed** | — | Enrollment records are built on this setting. |
+| **Issuer** | **Not Allowed** | — | Cross-issuer contamination risk. |
+| **Program Type** | **Not Allowed** | — | Changes the transaction processing pipeline. |
+| **Offer Duration — Shorten** | **Not Allowed** | — | Could eliminate cycles that customers planned to participate in. |
+| **Offer Name** | **Allowed** | **Immediate** | Internal text with no impact on offer logic or customers. |
+| **Offer Description** | **Allowed** | **Immediate** | Descriptive information with no impact on offer logic. |
+| **Offer Duration — Extend** | **Allowed** | **Next Cycle** | Adds more cycles at the end of the offer. |
+| **Program — Add New** | **Allowed** | **Current Cycle** | Allows new program customers to enroll. |
+| **Program — Remove Existing** | **Allowed** | **Next Cycle** | Enrolled customers complete the current cycle before exiting. |
+
+# Stage 4.1 — User Base
+
+The **User Base** defines who gets the offer and how customers are enrolled.
+
+| Field / Change | Decision | Cycle | Reason |
+|---|---|---|---|
+| **Static ↔ Dynamic Type Change** | **Not Allowed** | — | Static and Dynamic use different enrollment engines and data schemas. |
+| **Opt-In ↔ Smart Tag Attachment** | **Not Allowed** | — | These are different enrollment mechanisms. |
+| **Static — Add Members** | **Allowed** | **Current Cycle** | More customers get the offer without affecting existing customers. |
+| **Static — Remove Members** | **Allowed** | **Next Cycle** | Existing members complete the current cycle before exiting. |
+| **Dynamic — Add Smart Tag Value** | **Allowed** | **Current Cycle** | Allows more customer segments to enroll. |
+| **Dynamic — Remove Smart Tag Value** | **Allowed** | **Next Cycle** | Existing members complete the current cycle before exiting. |
+| **Eligibility Criteria — Add** | **Allowed** | **Current Cycle** | Expands the target audience. |
+| **Eligibility Criteria — Remove** | **Allowed** | **Next Cycle** | Fewer customers qualify, so the current cycle is allowed to finish. |
+| **Eligibility Criteria — Edit** | **Allowed** | **Next Cycle** | A value change could narrow the audience, so it applies from the next cycle. |
+
+# Stage 4.2 — Milestone Eligibility
+
+Milestone Eligibility defines how customer activity is accumulated and evaluated against the milestone.
+
+## Milestone Configuration
+
+These fields define the core structure of the milestone, including what is measured, the target, and how cycles work.
+
+| Field / Change | Decision | Cycle | Reason |
+|---|---|---|---|
+| **Aggregate By — Sum of Values ↔ Count of Transactions** | **Not Allowed** | — | Changes what the counter measures. Existing counters would no longer have the same meaning. |
+| **Aggregate Definition** | **Not Allowed** | — | Changes the underlying definition of what is accumulated. |
+| **Threshold Operator** | **Not Allowed** | — | Changes the fundamental milestone logic. |
+| **Threshold Amount** | **Allowed** | **Next Cycle** | Changes the core customer promise. The current cycle continues under the existing threshold. |
+| **Subscription Cycle Period** | **Not Allowed** | — | Changes the cycle boundaries used for milestone evaluation. |
+| **Number of Cycles — Increase** | **Allowed** | **Next Cycle** | Provides customers with additional cycles to participate. |
+| **Number of Cycles — Decrease** | **Not Allowed** | — | Eliminates cycles customers were expecting to participate in. |
+
+## Transaction Eligibility
+
+These fields define which transactions contribute towards the milestone threshold.
+
+| Field / Change | Decision | Cycle | Reason |
+|---|---|---|---|
+| **MCC / MID / TID — Add** | **Allowed** | **Current Cycle** | More transactions contribute towards the threshold immediately. |
+| **MCC / MID / TID — Remove** | **Allowed** | **Next Cycle** | Fewer transactions qualify, so the current cycle is allowed to finish. |
+| **POS Entry Mode — Add** | **Allowed** | **Current Cycle** | More ways to transact contribute towards the milestone. |
+| **POS Entry Mode — Remove** | **Allowed** | **Next Cycle** | Restricts qualifying transactions after the current cycle. |
+| **Transaction Type — Add** | **Allowed** | **Current Cycle** | More transaction types contribute towards the milestone. |
+| **Transaction Type — Remove** | **Allowed** | **Next Cycle** | Restricts qualifying transaction types after the current cycle. |
+| **Sovereignty Indicator — Add** | **Allowed** | **Current Cycle** | More transactions qualify. |
+| **Sovereignty Indicator — Remove** | **Allowed** | **Next Cycle** | Restricts the transaction population from the next cycle. |
+| **Transaction Code — Add** | **Allowed** | **Current Cycle** | More transaction codes contribute towards the milestone. |
+| **Transaction Code — Remove** | **Allowed** | **Next Cycle** | Restricts qualifying transaction codes from the next cycle. |
+| **Transaction Value — Raise Minimum** | **Allowed** | **Next Cycle** | Changes which transactions contribute towards the customer's accumulation. |
+| **Transaction Value — Lower Minimum** | **Allowed** | **Next Cycle** | Expands qualifying transactions while preserving the current-cycle configuration. |
+| **Date for Processing** | **Not Allowed** | — | Changing the processing date basis can move transactions between cycles and affect milestone accumulation. |
+
+# Stage 4.3 — Offer Calculation Rule
+
+The Calculation Rule represents the core customer promise, including the threshold and reward.
+
+All allowed changes in this section apply from the **next cycle**.
+
+| Field / Change | Decision | Cycle | Reason |
+|---|---|---|---|
+| **Rule Type Change — Flat → Slab, etc.** | **Not Allowed** | — | Uses a different computation engine and input structure. |
+| **Value Inputs Within the Same Rule Type** | **Allowed** | **Next Cycle** | Allows changes to values such as threshold, reward amount, percentage, and minimum/maximum values while protecting the current cycle. |
+| **Probabilistic Distribution — Add / Remove Levels** | **Allowed** | **Next Cycle** | Changes the reward distribution structure. |
+| **Skip Cashback Capping — Program / Transaction / MCC / MID** | **Allowed** | **Next Cycle** | Keeps the calculation configuration consistent for the new cycle. |
+| **Allow Reversal** | **Allowed** | **Next Cycle** | Keeps the calculation configuration consistent for the new cycle. |
+| **Funding Account** | **Not Allowed** | — | Changes where the money comes from. Financial infrastructure is set at creation. |
+
+# Stage 4.4 — Usage Limits
+
+Usage Limits define how many times or how much a customer can earn per cycle.
+
+All changes in this section apply from the **next cycle**.
+
+| Field / Change | Decision | Cycle | Reason |
+|---|---|---|---|
+| **Duration — Month → Quarter** | **Allowed** | **Next Cycle** | Changes the accumulation window. |
+| **Raise Count** | **Allowed** | **Next Cycle** | Keeps the usage-limit configuration consistent for the new cycle. |
+| **Lower Count** | **Allowed** | **Next Cycle** | Protects the customer's current-cycle earning cap. |
+| **Raise Amount** | **Allowed** | **Next Cycle** | Keeps the usage-limit configuration consistent for the new cycle. |
+| **Lower Amount** | **Allowed** | **Next Cycle** | Protects the customer's current-cycle earning cap. |
+| **Change Condition Type** | **Allowed** | **Next Cycle** | Changes what is being measured. |
+| **Add Limit Row** | **Allowed** | **Next Cycle** | Adds an additional cap. |
+| **Remove Limit Row** | **Allowed** | **Next Cycle** | Removes a cap from the next cycle. |
+
+# Stage 4.5 — Posting
+
+Posting is the reward delivery infrastructure. It controls when and how earned rewards reach the customer's account.
+
+Posting is configured once at offer creation.
+
+If the setup is incorrect, the correct path is to **expire the offer and create a new one**.
+
+| Field / Change | Decision | Reason |
+|---|---|---|
+| **Enable / Disable Posting** | **Not Allowed** | Posting is delivery infrastructure set at creation. |
+| **Posting Eligibility — Account Status** | **Not Allowed** | Changing eligibility mid-offer can create inconsistency between rewards posted under V1 and V2. |
+| **Posting Eligibility — Account Smart Tag** | **Not Allowed** | Changing the Smart Tag filter can create inconsistency in which rewards are delivered. |
+| **Posting Eligibility — Account Block Code** | **Not Allowed** | Block codes are compliance controls set at creation. |
+| **Posting Timing** | **Not Allowed** | Changes reward delivery timing. |
+| **Posting Frequency** | **Not Allowed** | Changes reward delivery frequency. |
+| **Reward Points Expiry** | **Not Allowed** | Affects already-posted rewards and can create inconsistency. |
+| **Posting Narration** | **Allowed** | Non-financial text on the customer's statement. |
+| **Reversal Narration** | **Allowed** | Non-financial text shown when rewards are reversed. |
+
+# Stage 5 — Display Elements
+
+All Display Elements are non-financial. They control what the customer sees in the app, including titles, descriptions, images, colors, and layouts.
+
+Display Elements do not affect reward calculation, enrollment, or posting logic.
+
+| Field / Change | Decision | Reason |
+|---|---|---|
+| **Labels, Display Title, Description** | **Allowed** | Controls visual and descriptive content. |
+| **Display Order, Color** | **Allowed** | Controls visual presentation and branding. |
+| **Offer / Merchant Logo, Background** | **Allowed** | Controls visual branding. |
+| **Section Details, CTA Button, Link** | **Allowed** | Controls offer detail page content. |
+| **Advanced Settings** | **Allowed** | Controls display configuration. |
+
+# Stage 6 — Communication
+
+All Communication configurations are non-financial. They control how and when the bank notifies customers about the offer.
+
+| Field / Change | Decision | Reason |
+|---|---|---|
+| **Event Triggers** | **Allowed** | Defines which events trigger notifications. |
+| **Message Content** | **Allowed** | Allows the bank to update customer messaging. |
+| **Channel — SMS / Push / Email** | **Allowed** | Allows the bank to update its communication strategy. |
+
+## How Milestone Offer Versioning Works — Step by Step
+
+**Step 1 — Bank Creates V2**
+
+The bank selects **"Create Version 2"** for the live Milestone Offer. The system creates V2 as a copy of V1 while V1 remains active.
+
+The existing offer rewards customers who spend **₹5,000 per month with 300 reward points** and is configured for **3 cycles**.
+
+**Step 2 — Bank Edits V2**
+
+The bank increases the number of cycles from **3 to 5**.
+
+**Step 3 — System Auto-Classifies Changes**
+
+The system identifies the change as:
+
+- **Next cycle:** Number of Cycles increases from 3 to 5.
+
+**Step 4 — System Checks the Current Cycle**
+
+The system checks the offer's cycle status to determine when the V2 change should take effect.
+
+**Step 5 — Bank Submits V2 for Approval**
+
+The bank reviews the V2 change summary and selects:
+
+**"Submit V2 for Approval →"**
+
+**Step 6 — Maker-Checker Approval**
+
+The checker reviews the V2 changes and either approves the version or sends it back for revision.
+
+**Step 7 — V2 Is Approved**
+
+V2 is approved, but the current cycle continues under the existing configuration.
+
+**Step 8 — Current Cycle Ends**
+
+The customer completes the current cycle under the existing configuration.
+
+The existing cycle is not disrupted.
+
+**Step 9 — Next Cycle Starts Under V2**
+
+The next cycle begins with the updated configuration.
+
+- The offer now has **5 cycles instead of 3**.
+- The additional cycles become available from the next cycle.
+- Existing customer progress is not disrupted.
+- The additional cycles provide customers with more opportunities to participate.
+
+**Clean switch.** V2 extends the offer without recreating the offer or disrupting the current cycle.
 
