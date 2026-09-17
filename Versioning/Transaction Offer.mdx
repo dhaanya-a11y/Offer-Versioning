@@ -3,12 +3,6 @@ title: Transactional Offer
 description: Understand versioning rules and configuration changes for Transactional Offers.
 ---
 
-## Why Versioning Is Needed
-
-Once an offer goes live, the **Setup Offer** section is locked. The bank cannot modify the configuration after go-live, including correcting a missed Merchant Category Code (MCC).
-
-The current workaround is to duplicate the entire offer and configure it again.
-
 ### Scenario — Reducing the Reward Rate
 
 A bank has launched a Transactional Offer that rewards customers with **5 reward points per transaction**. After monitoring the campaign, the bank decides to reduce the reward rate to **3 points** to control the cost of the offer.
@@ -51,47 +45,58 @@ Configurations that represent the underlying offer structure or restricted proce
 
 ## Versioning Classification
 
-Each configuration is classified based on whether it can be modified when creating a new version.
+<Card title="Versioning Classification">
 
 | Classification | Definition |
 | --- | --- |
 | **Allowed** | The field can be modified in a new version. |
 | **Not Allowed** | The field cannot be modified through versioning and must remain unchanged. |
 
+</Card>
+
 ---
 
-# Stage 1 — Offer Type
+## Stage 1 — Offer Type
+
+<Card title="Offer Type">
 
 | Field | Decision | Reason |
 | --- | --- | --- |
-| **Offer Type** | **Not Allowed** | Each offer type, such as Transaction, Milestone, Gamified, and EMI, uses a different processing engine. The data schema, calculation logic, and enrollment model are fundamentally different. Changing the offer type is equivalent to creating a new offer from scratch. |
+| **Offer Type** | <Badge color="green">Not Allowed</Badge> | Each offer type, such as Transaction, Milestone, Gamified, and EMI, uses a different processing engine. The data schema, calculation logic, and enrollment model are fundamentally different. Changing the offer type is equivalent to creating a new offer from scratch. |
+
+</Card>
 
 ---
 
-# Stage 2 — Outcome Type
+## Stage 2 — Outcome Type
+
+<Card title="Outcome Type">
 
 | Field | Decision | Reason |
 | --- | --- | --- |
-| **Outcome Type** | **Not Allowed** | Each outcome type, such as Cashback, Reward, and Voucher, uses a different ledger and disbursement mechanism. Cashback credits the statement, Reward points go to a loyalty ledger, and Vouchers generate external codes. This is a core structural change. |
+| **Outcome Type** | <Badge color="red">Not Allowed</Badge> | Each outcome type, such as Cashback, Reward, and Voucher, uses a different ledger and disbursement mechanism. Cashback credits the statement, Reward points go to a loyalty ledger, and Vouchers generate external codes. This is a core structural change. |
+
+</Card>
 
 ---
 
-# Stage 3 — Offer Scope
+## Stage 3 — Offer Scope
 
-Offer Scope contains the basic configuration that defines the applicability context of the offer.
+<Card title="Offer Scope">
 
 | Field / Change | Decision | Reason |
 | --- | --- | --- |
-| **Eligibility Level** | **Not Allowed** | All enrollment records are built on this setting, such as Account Level or Customer Level. Switching the setting invalidates existing enrollment data. |
-| **Issuer** | **Not Allowed** | Ledger accounts, compliance rules, and funding sources are different across issuers. |
-| **Program Type** | **Not Allowed** | Defines the card product category and the associated transaction processing pipeline. |
-| **Program — Remove Existing** | **Not Allowed** | Customers on the removed program are actively enrolled and earning. Removing the program cuts their access immediately. |
-| **Offer Name** | **Allowed** | Non-financial text that can be updated to correct a typo or update the offer name. |
-| **Offer Description** | **Allowed** | Non-financial descriptive information that can be updated to reflect changes. |
-| **Offer Duration — Extend** | **Allowed** | Gives customers more time with the offer. |
-| **Offer Duration — Shorten** | **Allowed with confirmation** | Ends the offer earlier. A confirmation is shown because enrolled customers will have less time. |
-| **Program — Add New** | **Allowed** | Allows an additional program to be associated with the existing offer. More customers become eligible without affecting existing customers. |
+| **Eligibility Level** | <Badge color="red">Not Allowed</Badge> | All enrollment records are built on this setting, such as Account Level or Customer Level. Switching the setting invalidates existing enrollment data. |
+| **Issuer** | <Badge color="red">Not Allowed</Badge> | Ledger accounts, compliance rules, and funding sources are different across issuers. |
+| **Program Type** | <Badge color="red">Not Allowed</Badge> | Defines the card product category and the associated transaction processing pipeline. |
+| **Program — Remove Existing** | <Badge color="red">Not Allowed</Badge> | Customers on the removed program are actively enrolled and earning. Removing the program cuts their access immediately. |
+| **Offer Name** | <Badge color="green">Allowed</Badge> | Non-financial text that can be updated to correct a typo or update the offer name. |
+| **Offer Description** | <Badge color="green">Allowed</Badge> | Non-financial descriptive information that can be updated to reflect changes. |
+| **Offer Duration — Extend** | <Badge color="green">Allowed</Badge> | Gives customers more time with the offer. |
+| **Offer Duration — Shorten** | <Badge color="yellow">Allowed with confirmation</Badge> | Ends the offer earlier. A confirmation is shown because enrolled customers will have less time. |
+| **Program — Add New** | <Badge color="green">Allowed</Badge> | Allows an additional program to be associated with the existing offer. More customers become eligible without affecting existing customers. |
 
+</Card>
 ---
 
 # Stage 4.1 — User Base
@@ -111,8 +116,10 @@ The underlying data schemas are different. Switching between these configuration
 
 | Change | Decision | Reason |
 | --- | --- | --- |
-| **Static → Dynamic** | **Not Allowed** | Changes the enrollment engine and underlying data schema. |
-| **Dynamic → Static** | **Not Allowed** | Changes the enrollment engine and underlying data schema. |
+| **Static → Dynamic** | <Badge color="red">Not Allowed</Badge> | Changes the enrollment engine and underlying data schema. |
+| **Dynamic → Static** | <Badge color="red">Not Allowed</Badge> | Changes the enrollment engine and underlying data schema. |
+
+</Card>
 
 For Transaction Offers, creating a new offer has zero customer impact because there are no counters to lose. Therefore, changing the enrollment model should be handled through a new offer.
 
@@ -126,10 +133,14 @@ For Transaction Offers, creating a new offer has zero customer impact because th
 
 ## Static Base
 
+<Card title="Static Base">
+
 | Change | Decision | Reason |
 | --- | --- | --- |
-| **Add Members to List** | **Allowed** | More customers get the offer. No existing member is affected. |
-| **Remove Members from List** | **Not Allowed** | These customers are actively enrolled and earning on every transaction. Removing them cuts their access. |
+| **Add Members to List** | <Badge color="green">Allowed</Badge> | More customers get the offer. No existing member is affected. |
+| **Remove Members from List** | <Badge color="red">Not Allowed</Badge> | These customers are actively enrolled and earning on every transaction. Removing them cuts their access. |
+
+</Card>
 
 ---
 
@@ -137,11 +148,15 @@ For Transaction Offers, creating a new offer has zero customer impact because th
 
 **Opt-In** means customers voluntarily choose to join the offer. They see the offer, opt in, and the Smart Tag is attached to their profile.
 
+<Card title="Dynamic Config — V1 Uses Opt-In">
+
 | Change | Decision | Reason |
 | --- | --- | --- |
-| **Add Smart Tag Value** | **Allowed** | More customer segments can see and opt in. |
-| **Remove Smart Tag Value** | **Not Allowed** | Customers with the tag have actively opted in. Removing the tag disqualifies them from an offer they chose to join. |
-| **Switch to Smart Tag Attachment** | **Not Allowed** | Opt-In and Smart Tag Attachment are fundamentally different enrollment mechanisms. Switching changes the customer's relationship with the offer. |
+| **Add Smart Tag Value** | <Badge color="green">Allowed</Badge> | More customer segments can see and opt in. |
+| **Remove Smart Tag Value** | <Badge color="red">Not Allowed</Badge> | Customers with the tag have actively opted in. Removing the tag disqualifies them from an offer they chose to join. |
+| **Switch to Smart Tag Attachment** | <Badge color="red">Not Allowed</Badge> | Opt-In and Smart Tag Attachment are fundamentally different enrollment mechanisms. Switching changes the customer's relationship with the offer. |
+
+</Card>
 
 ---
 
@@ -149,14 +164,18 @@ For Transaction Offers, creating a new offer has zero customer impact because th
 
 **Smart Tag Attachment** means the system automatically enrolls customers when a tag is attached to their profile. The customer does not choose to join.
 
+<Card title="Dynamic Config — V1 Uses Smart Tag Attachment">
+
 | Change | Decision | Reason |
 | --- | --- | --- |
-| **Add Smart Tag Value** | **Allowed** | More customers get auto-enrolled. |
-| **Remove Smart Tag Value** | **Not Allowed** | Auto-enrolled customers would lose access without warning. |
-| **Switch to Opt-In** | **Not Allowed** | Changes the enrollment mechanism. Auto-enrolled customers would need to manually opt in. |
-| **Offer Activation Date** | **Not Allowed** | Defines when the offer activates after tag attachment. Changing it affects already-enrolled timelines. |
-| **Subscription Duration** | **Not Allowed** | Defines how long each customer stays enrolled. Changing it alters the commitment for enrolled customers. |
-| **Subscription Cut-Off Date** | **Not Allowed** | Defines the deadline for new enrollments. Changing it affects the enrollment pipeline. |
+| **Add Smart Tag Value** | <Badge color="green">Allowed</Badge> | More customers get auto-enrolled. |
+| **Remove Smart Tag Value** | <Badge color="red">Not Allowed</Badge> | Auto-enrolled customers would lose access without warning. |
+| **Switch to Opt-In** | <Badge color="red">Not Allowed</Badge> | Changes the enrollment mechanism. Auto-enrolled customers would need to manually opt in. |
+| **Offer Activation Date** | <Badge color="red">Not Allowed</Badge> | Defines when the offer activates after tag attachment. Changing it affects already-enrolled timelines. |
+| **Subscription Duration** | <Badge color="red">Not Allowed</Badge> | Defines how long each customer stays enrolled. Changing it alters the commitment for enrolled customers. |
+| **Subscription Cut-Off Date** | <Badge color="red">Not Allowed</Badge> | Defines the deadline for new enrollments. Changing it affects the enrollment pipeline. |
+
+</Card>
 
 ---
 
@@ -165,12 +184,15 @@ For Transaction Offers, creating a new offer has zero customer impact because th
 Eligibility Criteria applies to both **Static** and **Dynamic** configurations.
 
 Eligibility criteria such as **Smart Tag, KYC Status, Accounts, Birthdate**, and others filter which customers qualify. These represent the bank's operational targeting decisions.
+<Card title="Eligibility Criteria">
 
 | Change | Decision | Reason |
 | --- | --- | --- |
-| **Add New Criteria** | **Allowed** | Allows the bank to define the target audience. The next transaction is evaluated under the new rules. |
-| **Remove Existing Criteria** | **Allowed** | Opens eligibility so more customers can qualify. |
-| **Edit Criteria Value** | **Allowed** | Refines the target audience. The next transaction is evaluated under the new value. |
+| **Add New Criteria** | <Badge color="green">Allowed</Badge> | Allows the bank to define the target audience. The next transaction is evaluated under the new rules. |
+| **Remove Existing Criteria** | <Badge color="green">Allowed</Badge> | Opens eligibility so more customers can qualify. |
+| **Edit Criteria Value** | <Badge color="green">Allowed</Badge> | Refines the target audience. The next transaction is evaluated under the new value. |
+
+</Card>
 
 ---
 
@@ -221,21 +243,25 @@ The customer was never told that MCC 5411 is included; they see **"earn on groce
 
 All fields in this section are editable in V2.
 
+<Card title="Transaction Eligibility">
+
 | Field / Change | Decision | Reason |
 | --- | --- | --- |
-| **Add MCC / MID / TID** | **Allowed** | More transactions qualify. No customer is affected. |
-| **Remove MCC / MID / TID** | **Allowed** | There is no counter or accumulated progress. The next transaction at the removed MCC does not earn. |
-| **Add POS Entry Mode** | **Allowed** | More ways to transact qualify. |
-| **Remove POS Entry Mode** | **Allowed** | The next transaction through the removed mode does not earn. |
-| **Add Transaction Type** | **Allowed** | More activity types qualify. |
-| **Remove Transaction Type** | **Allowed** | The next transaction of the removed type does not earn. |
-| **Add Sovereignty Indicator** | **Allowed** | Adds another transaction classification. |
-| **Remove Sovereignty Indicator** | **Allowed** | Represents the bank's operational decision. |
-| **Add Transaction Code** | **Allowed** | More transaction codes qualify. |
-| **Remove Transaction Code** | **Allowed** | Represents the bank's operational decision. |
-| **Transaction Value — Raise Minimum** | **Allowed** | Represents the bank's financial control. |
-| **Transaction Value — Lower Minimum** | **Allowed** | Allows more transactions to qualify. |
-| **Date for Processing** | **Allowed** | Each transaction is independent and no accumulation window is affected. |
+| **Add MCC / MID / TID** | <Badge color="green">Allowed</Badge> | More transactions qualify. No customer is affected. |
+| **Remove MCC / MID / TID** | <Badge color="green">Allowed</Badge> | There is no counter or accumulated progress. The next transaction at the removed MCC does not earn. |
+| **Add POS Entry Mode** | <Badge color="green">Allowed</Badge> | More ways to transact qualify. |
+| **Remove POS Entry Mode** | <Badge color="green">Allowed</Badge> | The next transaction through the removed mode does not earn. |
+| **Add Transaction Type** | <Badge color="green">Allowed</Badge> | More activity types qualify. |
+| **Remove Transaction Type** | <Badge color="green">Allowed</Badge> | The next transaction of the removed type does not earn. |
+| **Add Sovereignty Indicator** | <Badge color="green">Allowed</Badge> | Adds another transaction classification. |
+| **Remove Sovereignty Indicator** | <Badge color="green">Allowed</Badge> | Represents the bank's operational decision. |
+| **Add Transaction Code** | <Badge color="green">Allowed</Badge> | More transaction codes qualify. |
+| **Remove Transaction Code** | <Badge color="green">Allowed</Badge> | Represents the bank's operational decision. |
+| **Transaction Value — Raise Minimum** | <Badge color="green">Allowed</Badge> | Represents the bank's financial control. |
+| **Transaction Value — Lower Minimum** | <Badge color="green">Allowed</Badge> | Allows more transactions to qualify. |
+| **Date for Processing** | <Badge color="green">Allowed</Badge> | Each transaction is independent and no accumulation window is affected. |
+
+</Card>
 
 ---
 
@@ -243,16 +269,20 @@ All fields in this section are editable in V2.
 
 The **Rule Type** defines the underlying method used to calculate the offer outcome.
 
+<Card title="Offer Calculation Rule">
+
 | Field / Change | Decision | Reason |
 | --- | --- | --- |
-| **Rule Type Change — Flat → Slab, Percentage → Flat, etc.** | **Not Allowed** | Flat, Slab, and Percentage use different calculation strategies, computation engines, and data schemas. Changing the rule type is equivalent to creating a new calculation from scratch. |
-| **Raise Reward Value — for example, 3 → 5 points** | **Allowed** | The customer receives more per transaction. |
-| **Lower Reward Value — for example, 5 → 3 points** | **Allowed** | Each transaction is independent. The customer sees the current rate, and the next transaction uses the new value. |
-| **Change "Per X Spent" Base — for example, 100 → 50** | **Allowed** | Changes how frequently rewards are generated. |
-| **Skip Reward Point Capping — Turn ON** | **Allowed** | Allows the offer to operate outside existing program-level caps when required for a specific campaign. |
-| **Skip Reward Point Capping — Turn OFF** | **Allowed** | Allows the bank to bring the offer under program-level caps when required to control cost. |
-| **Allow Reversal — Enable** | **Allowed** | Allows the bank to recover points on refunded transactions. |
-| **Allow Reversal — Disable** | **Allowed** | Allows the bank to let customers retain points on refunds. |
+| **Rule Type Change — Flat → Slab, Percentage → Flat, etc.** | <Badge color="red">Not Allowed</Badge> | Flat, Slab, and Percentage use different calculation strategies, computation engines, and data schemas. Changing the rule type is equivalent to creating a new calculation from scratch. |
+| **Raise Reward Value — for example, 3 → 5 points** | <Badge color="green">Allowed</Badge> | The customer receives more per transaction. |
+| **Lower Reward Value — for example, 5 → 3 points** | <Badge color="green">Allowed</Badge> | Each transaction is independent. The customer sees the current rate, and the next transaction uses the new value. |
+| **Change "Per X Spent" Base — for example, 100 → 50** | <Badge color="green">Allowed</Badge> | Changes how frequently rewards are generated. |
+| **Skip Reward Point Capping — Turn ON** | <Badge color="green">Allowed</Badge> | Allows the offer to operate outside existing program-level caps when required for a specific campaign. |
+| **Skip Reward Point Capping — Turn OFF** | <Badge color="green">Allowed</Badge> | Allows the bank to bring the offer under program-level caps when required to control cost. |
+| **Allow Reversal — Enable** | <Badge color="green">Allowed</Badge> | Allows the bank to recover points on refunded transactions. |
+| **Allow Reversal — Disable** | <Badge color="green">Allowed</Badge> | Allows the bank to let customers retain points on refunds. |
+
+</Card>
 
 ---
 
@@ -270,16 +300,20 @@ For Transactional Offers, there are **no running counters**. The limit defines t
 
 Blocking these changes would require the bank to create a new offer for every cap adjustment.
 
+<Card title="Usage Limits">
+
 | Field / Change | Decision | Reason |
 | --- | --- | --- |
-| **Duration — Month → Quarter** | **Allowed** | No accumulation counter is affected. The cap window changes going forward. |
-| **Raise Count — for example, 5 → 10** | **Allowed** | Allows the customer to earn more times. |
-| **Lower Count — for example, 10 → 5** | **Allowed** | Allows the bank to control costs. |
-| **Raise Amount — for example, 500 → 1000** | **Allowed** | Allows the customer to earn more value. |
-| **Lower Amount — for example, 1000 → 500** | **Allowed** | Allows the bank to control costs. |
-| **Change Condition Type — Count / Amount / Both** | **Allowed** | Changes how the limit is measured. |
-| **Add New Limit Row** | **Allowed** | Adds an additional usage-limit configuration. |
-| **Remove Existing Limit Row** | **Allowed** | Removes an existing usage-limit configuration. |
+| **Duration — Month → Quarter** | <Badge color="green">Allowed</Badge> | No accumulation counter is affected. The cap window changes going forward. |
+| **Raise Count — for example, 5 → 10** | <Badge color="green">Allowed</Badge> | Allows the customer to earn more times. |
+| **Lower Count — for example, 10 → 5** | <Badge color="green">Allowed</Badge> | Allows the bank to control costs. |
+| **Raise Amount — for example, 500 → 1000** | <Badge color="green">Allowed</Badge> | Allows the customer to earn more value. |
+| **Lower Amount — for example, 1000 → 500** | <Badge color="green">Allowed</Badge> | Allows the bank to control costs. |
+| **Change Condition Type — Count / Amount / Both** | <Badge color="green">Allowed</Badge> | Changes how the limit is measured. |
+| **Add New Limit Row** | <Badge color="green">Allowed</Badge> | Adds an additional usage-limit configuration. |
+| **Remove Existing Limit Row** | <Badge color="green">Allowed</Badge> | Removes an existing usage-limit configuration. |
+
+</Card>
 
 --- 
 
@@ -305,14 +339,18 @@ Therefore, the Posting toggle cannot be changed through versioning.
 
 If Posting is already enabled, the following configurations apply:
 
+<Card title="Posting">
+
 | Field / Change | Decision | Reason |
 | --- | --- | --- |
-| **Posting Eligibility — Account Status, Account Smart Tag, Account Block Code** | **Not Allowed** | Only adding filters would be possible, while removing V1 filters is not safe. The limited value of add-only changes does not justify the complexity. |
-| **Posting Timing — Schedule / Post Immediately** | **Not Allowed** | Changes when the customer receives the reward. |
-| **Posting Frequency — Every Transaction / Subscription Ends** | **Not Allowed** | Changes how frequently rewards are posted. |
-| **Reward Points Expiry — X Days** | **Not Allowed** | Changes how long posted rewards remain valid and can create inconsistency between V1 and V2 posted rewards. |
-| **Posting Narration** | **Allowed** | Non-financial text displayed on the customer's statement. |
-| **Reversal Narration** | **Allowed** | Non-financial text displayed when points are reversed. |
+| **Posting Eligibility — Account Status, Account Smart Tag, Account Block Code** | <Badge color="red">Not Allowed</Badge> | Only adding filters would be possible, while removing V1 filters is not safe. The limited value of add-only changes does not justify the complexity. |
+| **Posting Timing — Schedule / Post Immediately** | <Badge color="red">Not Allowed</Badge> | Changes when the customer receives the reward. |
+| **Posting Frequency — Every Transaction / Subscription Ends** | <Badge color="red">Not Allowed</Badge> | Changes how frequently rewards are posted. |
+| **Reward Points Expiry — X Days** | <Badge color="red">Not Allowed</Badge> | Changes how long posted rewards remain valid and can create inconsistency between V1 and V2 posted rewards. |
+| **Posting Narration** | <Badge color="green">Allowed</Badge> | Non-financial text displayed on the customer's statement. |
+| **Reversal Narration** | <Badge color="green">Allowed</Badge> | Non-financial text displayed when points are reversed. |
+
+</Card>
 
 Posting is configured once at offer creation.
 
@@ -327,28 +365,17 @@ All **Display Elements** are non-financial.
 They control what the customer sees in the app, including titles, descriptions, images, colors, and layouts.
 
 Display Elements do not affect reward calculation, enrollment, or posting logic.
+<Card title="Display Elements">
 
 | Field / Change | Decision | Reason |
 | --- | --- | --- |
-| **Labels, Display Title, Description** | **Allowed** | Controls visual and descriptive content. |
-| **Display Order, Color** | **Allowed** | Controls visual presentation and branding. |
-| **Offer / Merchant Logo, Background** | **Allowed** | Controls visual branding. |
-| **Section Details, CTA Button, Link** | **Allowed** | Controls the offer detail page content. |
-| **Advanced Settings** | **Allowed** | Controls display configuration. |
+| **Labels, Display Title, Description** | <Badge color="green">Allowed</Badge> | Controls visual and descriptive content. |
+| **Display Order, Color** | <Badge color="green">Allowed</Badge> | Controls visual presentation and branding. |
+| **Offer / Merchant Logo, Background** | <Badge color="green">Allowed</Badge> | Controls visual branding. |
+| **Section Details, CTA Button, Link** | <Badge color="green">Allowed</Badge> | Controls the offer detail page content. |
+| **Advanced Settings** | <Badge color="green">Allowed</Badge> | Controls display configuration. |
 
----
-
-# Stage 6 — Communication
-
-All **Communication** configurations are non-financial.
-
-They control how and when the bank notifies customers about the offer.
-
-| Field / Change | Decision | Reason |
-| --- | --- | --- |
-| **Event Triggers** | **Allowed** | Defines which events trigger notifications. |
-| **Message Content** | **Allowed** | Allows the bank to update customer messaging. |
-| **Channel — SMS / Push / Email** | **Allowed** | Allows the bank to update its communication strategy. |
+</Card>
 
 ---
 # How Transactional Offer Versioning Works
