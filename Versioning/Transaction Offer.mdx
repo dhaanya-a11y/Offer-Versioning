@@ -315,10 +315,27 @@ For Transaction Offers, creating a new offer has zero customer impact because th
 
 <Card title="Static Base">
 
-| Change | Decision | Reason |
-| --- | --- | --- |
-| **Add Members to List** | <Badge color="green">Allowed</Badge> | More customers get the offer. No existing member is affected. |
-| **Remove Members from List** | <Badge color="red">Not Allowed</Badge> | These customers are actively enrolled and earning on every transaction. Removing them cuts their access. |
+<table style={{ width: "100%", borderCollapse: "collapse" }}>
+  <thead>
+    <tr>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Change</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Decision</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Add Members to List</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>More customers get the offer. No existing member is affected.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Remove Members from List</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>These customers are actively enrolled and earning on every transaction. Removing them cuts their access.</td>
+    </tr>
+  </tbody>
+</table>
 
 </Card>
 
@@ -330,11 +347,32 @@ For Transaction Offers, creating a new offer has zero customer impact because th
 
 <Card title="Dynamic Config — V1 Uses Opt-In">
 
-| Change | Decision | Reason |
-| --- | --- | --- |
-| **Add Smart Tag Value** | <Badge color="green">Allowed</Badge> | More customer segments can see and opt in. |
-| **Remove Smart Tag Value** | <Badge color="red">Not Allowed</Badge> | Customers with the tag have actively opted in. Removing the tag disqualifies them from an offer they chose to join. |
-| **Switch to Smart Tag Attachment** | <Badge color="red">Not Allowed</Badge> | Opt-In and Smart Tag Attachment are fundamentally different enrollment mechanisms. Switching changes the customer's relationship with the offer. |
+<table style={{ width: "100%", borderCollapse: "collapse" }}>
+  <thead>
+    <tr>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Change</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Decision</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Add Smart Tag Value</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>More customer segments can see and opt in.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Remove Smart Tag Value</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Customers with the tag have actively opted in. Removing the tag disqualifies them from an offer they chose to join.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Switch to Smart Tag Attachment</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Opt-In and Smart Tag Attachment are fundamentally different enrollment mechanisms. Switching changes the customer's relationship with the offer.</td>
+    </tr>
+  </tbody>
+</table>
 
 </Card>
 
@@ -346,14 +384,47 @@ For Transaction Offers, creating a new offer has zero customer impact because th
 
 <Card title="Dynamic Config — V1 Uses Smart Tag Attachment">
 
-| Change | Decision | Reason |
-| --- | --- | --- |
-| **Add Smart Tag Value** | <Badge color="green">Allowed</Badge> | More customers get auto-enrolled. |
-| **Remove Smart Tag Value** | <Badge color="red">Not Allowed</Badge> | Auto-enrolled customers would lose access without warning. |
-| **Switch to Opt-In** | <Badge color="red">Not Allowed</Badge> | Changes the enrollment mechanism. Auto-enrolled customers would need to manually opt in. |
-| **Offer Activation Date** | <Badge color="red">Not Allowed</Badge> | Defines when the offer activates after tag attachment. Changing it affects already-enrolled timelines. |
-| **Subscription Duration** | <Badge color="red">Not Allowed</Badge> | Defines how long each customer stays enrolled. Changing it alters the commitment for enrolled customers. |
-| **Subscription Cut-Off Date** | <Badge color="red">Not Allowed</Badge> | Defines the deadline for new enrollments. Changing it affects the enrollment pipeline. |
+<table style={{ width: "100%", borderCollapse: "collapse" }}>
+  <thead>
+    <tr>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Change</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Decision</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Add Smart Tag Value</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>More customers get auto-enrolled.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Remove Smart Tag Value</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Auto-enrolled customers would lose access without warning.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Switch to Opt-In</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Changes the enrollment mechanism. Auto-enrolled customers would need to manually opt in.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Offer Activation Date</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Defines when the offer activates after tag attachment. Changing it affects already-enrolled timelines.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Subscription Duration</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Defines how long each customer stays enrolled. Changing it alters the commitment for enrolled customers.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Subscription Cut-Off Date</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Defines the deadline for new enrollments. Changing it affects the enrollment pipeline.</td>
+    </tr>
+  </tbody>
+</table>
 
 </Card>
 
@@ -366,12 +437,32 @@ Eligibility Criteria applies to both **Static** and **Dynamic** configurations.
 Eligibility criteria such as **Smart Tag, KYC Status, Accounts, Birthdate**, and others filter which customers qualify. These represent the bank's operational targeting decisions.
 <Card title="Eligibility Criteria">
 
-| Change | Decision | Reason |
-| --- | --- | --- |
-| **Add New Criteria** | <Badge color="green">Allowed</Badge> | Allows the bank to define the target audience. The next transaction is evaluated under the new rules. |
-| **Remove Existing Criteria** | <Badge color="green">Allowed</Badge> | Opens eligibility so more customers can qualify. |
-| **Edit Criteria Value** | <Badge color="green">Allowed</Badge> | Refines the target audience. The next transaction is evaluated under the new value. |
-
+<table style={{ width: "100%", borderCollapse: "collapse" }}>
+  <thead>
+    <tr>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Change</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Decision</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Add New Criteria</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Allows the bank to define the target audience. The next transaction is evaluated under the new rules.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Remove Existing Criteria</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Opens eligibility so more customers can qualify.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Edit Criteria Value</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Refines the target audience. The next transaction is evaluated under the new value.</td>
+    </tr>
+  </tbody>
+</table>
 
 </Card>
 
