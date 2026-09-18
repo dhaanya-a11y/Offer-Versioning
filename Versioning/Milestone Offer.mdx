@@ -87,47 +87,198 @@ This approach allows changes that expand eligibility to take effect sooner while
 
 # Stage 1 — Offer Type
 
-| Field | Decision | Reason |
-|---|---|---|
-| **Offer Type** | **Not Allowed** | Different offer types use different processing engines. Milestone and Transactional Offers use different counter and calculation logic. |
+<Card title="Offer Type">
+
+<table style={{ width: "100%", borderCollapse: "collapse" }}>
+  <thead>
+    <tr>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Field</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Decision</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Offer Type</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Different offer types use different processing engines. Milestone and Transactional Offers use different counter and calculation logic.</td>
+    </tr>
+  </tbody>
+</table>
+
+</Card>
 
 # Stage 2 — Outcome Type
 
-| Field | Decision | Reason |
-|---|---|---|
-| **Outcome Type** | **Not Allowed** | Different outcome types use different ledger and disbursement mechanisms. |
+<Card title="Outcome Type">
+
+<table style={{ width: "100%", borderCollapse: "collapse" }}>
+  <thead>
+    <tr>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Field</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Decision</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Outcome Type</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Different outcome types use different ledger and disbursement mechanisms.</td>
+    </tr>
+  </tbody>
+</table>
+
+</Card>
 
 # Stage 3 — Offer Scope
 
 Offer Scope contains the basic configuration that defines the applicability context of the offer.
 
-| Field / Change | Decision | Cycle | Reason |
-|---|---|---|---|
-| **Eligibility Level** | **Not Allowed** | — | Enrollment records are built on this setting. |
-| **Issuer** | **Not Allowed** | — | Cross-issuer contamination risk. |
-| **Program Type** | **Not Allowed** | — | Changes the transaction processing pipeline. |
-| **Offer Duration — Shorten** | **Not Allowed** | — | Could eliminate cycles that customers planned to participate in. |
-| **Offer Name** | **Allowed** | **Immediate** | Internal text with no impact on offer logic or customers. |
-| **Offer Description** | **Allowed** | **Immediate** | Descriptive information with no impact on offer logic. |
-| **Offer Duration — Extend** | **Allowed** | **Next Cycle** | Adds more cycles at the end of the offer. |
-| **Program — Add New** | **Allowed** | **Current Cycle** | Allows new program customers to enroll. |
-| **Program — Remove Existing** | **Allowed** | **Next Cycle** | Enrolled customers complete the current cycle before exiting. |
+<Card title="Offer Scope">
+
+<table style={{ width: "100%", borderCollapse: "collapse" }}>
+  <thead>
+    <tr>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Field / Change</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Decision</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Cycle</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Eligibility Level</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>—</td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Enrollment records are built on this setting.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Issuer</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>—</td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Cross-issuer contamination risk.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Program Type</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>—</td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Changes the transaction processing pipeline.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Offer Duration — Shorten</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>—</td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Could eliminate cycles that customers planned to participate in.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Offer Name</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Immediate</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Internal text with no impact on offer logic or customers.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Offer Description</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Immediate</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Descriptive information with no impact on offer logic.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Offer Duration — Extend</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Next Cycle</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Adds more cycles at the end of the offer.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Program — Add New</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Current Cycle</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Allows new program customers to enroll.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Program — Remove Existing</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Next Cycle</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Enrolled customers complete the current cycle before exiting.</td>
+    </tr>
+  </tbody>
+</table>
+
+</Card>
 
 # Stage 4.1 — User Base
 
 The **User Base** defines who gets the offer and how customers are enrolled.
+<Card title="User Base">
 
-| Field / Change | Decision | Cycle | Reason |
-|---|---|---|---|
-| **Static ↔ Dynamic Type Change** | **Not Allowed** | — | Static and Dynamic use different enrollment engines and data schemas. |
-| **Opt-In ↔ Smart Tag Attachment** | **Not Allowed** | — | These are different enrollment mechanisms. |
-| **Static — Add Members** | **Allowed** | **Current Cycle** | More customers get the offer without affecting existing customers. |
-| **Static — Remove Members** | **Allowed** | **Next Cycle** | Existing members complete the current cycle before exiting. |
-| **Dynamic — Add Smart Tag Value** | **Allowed** | **Current Cycle** | Allows more customer segments to enroll. |
-| **Dynamic — Remove Smart Tag Value** | **Allowed** | **Next Cycle** | Existing members complete the current cycle before exiting. |
-| **Eligibility Criteria — Add** | **Allowed** | **Current Cycle** | Expands the target audience. |
-| **Eligibility Criteria — Remove** | **Allowed** | **Next Cycle** | Fewer customers qualify, so the current cycle is allowed to finish. |
-| **Eligibility Criteria — Edit** | **Allowed** | **Next Cycle** | A value change could narrow the audience, so it applies from the next cycle. |
+<table style={{ width: "100%", borderCollapse: "collapse" }}>
+  <thead>
+    <tr>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Field / Change</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Decision</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Cycle</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Static ↔ Dynamic Type Change</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>—</td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Static and Dynamic use different enrollment engines and data schemas.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Opt-In ↔ Smart Tag Attachment</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>—</td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>These are different enrollment mechanisms.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Static — Add Members</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Current Cycle</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>More customers get the offer without affecting existing customers.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Static — Remove Members</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Next Cycle</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Existing members complete the current cycle before exiting.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Dynamic — Add Smart Tag Value</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Current Cycle</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Allows more customer segments to enroll.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Dynamic — Remove Smart Tag Value</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Next Cycle</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Existing members complete the current cycle before exiting.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Eligibility Criteria — Add</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Current Cycle</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Expands the target audience.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Eligibility Criteria — Remove</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Next Cycle</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Fewer customers qualify, so the current cycle is allowed to finish.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Eligibility Criteria — Edit</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Next Cycle</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>A value change could narrow the audience, so it applies from the next cycle.</td>
+    </tr>
+  </tbody>
+</table>
+
+</Card>
 
 # Stage 4.2 — Milestone Eligibility
 
@@ -137,35 +288,162 @@ Milestone Eligibility defines how customer activity is accumulated and evaluated
 
 These fields define the core structure of the milestone, including what is measured, the target, and how cycles work.
 
-| Field / Change | Decision | Cycle | Reason |
-|---|---|---|---|
-| **Aggregate By — Sum of Values ↔ Count of Transactions** | **Not Allowed** | — | Changes what the counter measures. Existing counters would no longer have the same meaning. |
-| **Aggregate Definition** | **Not Allowed** | — | Changes the underlying definition of what is accumulated. |
-| **Threshold Operator** | **Not Allowed** | — | Changes the fundamental milestone logic. |
-| **Threshold Amount** | **Allowed** | **Next Cycle** | Changes the core customer promise. The current cycle continues under the existing threshold. |
-| **Subscription Cycle Period** | **Not Allowed** | — | Changes the cycle boundaries used for milestone evaluation. |
-| **Number of Cycles — Increase** | **Allowed** | **Next Cycle** | Provides customers with additional cycles to participate. |
-| **Number of Cycles — Decrease** | **Not Allowed** | — | Eliminates cycles customers were expecting to participate in. |
+<Card title="Milestone Configuration">
+
+<table style={{ width: "100%", borderCollapse: "collapse" }}>
+  <thead>
+    <tr>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Field / Change</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Decision</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Cycle</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Aggregate By — Sum of Values ↔ Count of Transactions</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>—</td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Changes what the counter measures. Existing counters would no longer have the same meaning.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Aggregate Definition</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>—</td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Changes the underlying definition of what is accumulated.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Threshold Operator</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>—</td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Changes the fundamental milestone logic.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Threshold Amount</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Next Cycle</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Changes the core customer promise. The current cycle continues under the existing threshold.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Subscription Cycle Period</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>—</td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Changes the cycle boundaries used for milestone evaluation.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Number of Cycles — Increase</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Next Cycle</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Provides customers with additional cycles to participate.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Number of Cycles — Decrease</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>—</td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Eliminates cycles customers were expecting to participate in.</td>
+    </tr>
+  </tbody>
+</table>
+
+</Card>
 
 ## Transaction Eligibility
 
 These fields define which transactions contribute towards the milestone threshold.
+<Card title="Transaction Eligibility">
 
-| Field / Change | Decision | Cycle | Reason |
-|---|---|---|---|
-| **MCC / MID / TID — Add** | **Allowed** | **Current Cycle** | More transactions contribute towards the threshold immediately. |
-| **MCC / MID / TID — Remove** | **Allowed** | **Next Cycle** | Fewer transactions qualify, so the current cycle is allowed to finish. |
-| **POS Entry Mode — Add** | **Allowed** | **Current Cycle** | More ways to transact contribute towards the milestone. |
-| **POS Entry Mode — Remove** | **Allowed** | **Next Cycle** | Restricts qualifying transactions after the current cycle. |
-| **Transaction Type — Add** | **Allowed** | **Current Cycle** | More transaction types contribute towards the milestone. |
-| **Transaction Type — Remove** | **Allowed** | **Next Cycle** | Restricts qualifying transaction types after the current cycle. |
-| **Sovereignty Indicator — Add** | **Allowed** | **Current Cycle** | More transactions qualify. |
-| **Sovereignty Indicator — Remove** | **Allowed** | **Next Cycle** | Restricts the transaction population from the next cycle. |
-| **Transaction Code — Add** | **Allowed** | **Current Cycle** | More transaction codes contribute towards the milestone. |
-| **Transaction Code — Remove** | **Allowed** | **Next Cycle** | Restricts qualifying transaction codes from the next cycle. |
-| **Transaction Value — Raise Minimum** | **Allowed** | **Next Cycle** | Changes which transactions contribute towards the customer's accumulation. |
-| **Transaction Value — Lower Minimum** | **Allowed** | **Next Cycle** | Expands qualifying transactions while preserving the current-cycle configuration. |
-| **Date for Processing** | **Not Allowed** | — | Changing the processing date basis can move transactions between cycles and affect milestone accumulation. |
+<table style={{ width: "100%", borderCollapse: "collapse" }}>
+  <thead>
+    <tr>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Field / Change</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Decision</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Cycle</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>MCC / MID / TID — Add</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Current Cycle</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>More transactions contribute towards the threshold immediately.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>MCC / MID / TID — Remove</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Next Cycle</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Fewer transactions qualify, so the current cycle is allowed to finish.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>POS Entry Mode — Add</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Current Cycle</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>More ways to transact contribute towards the milestone.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>POS Entry Mode — Remove</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Next Cycle</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Restricts qualifying transactions after the current cycle.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Transaction Type — Add</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Current Cycle</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>More transaction types contribute towards the milestone.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Transaction Type — Remove</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Next Cycle</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Restricts qualifying transaction types after the current cycle.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Sovereignty Indicator — Add</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Current Cycle</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>More transactions qualify.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Sovereignty Indicator — Remove</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Next Cycle</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Restricts the transaction population from the next cycle.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Transaction Code — Add</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Current Cycle</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>More transaction codes contribute towards the milestone.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Transaction Code — Remove</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Next Cycle</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Restricts qualifying transaction codes from the next cycle.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Transaction Value — Raise Minimum</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Next Cycle</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Changes which transactions contribute towards the customer's accumulation.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Transaction Value — Lower Minimum</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Next Cycle</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Expands qualifying transactions while preserving the current-cycle configuration.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Date for Processing</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>—</td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Changing the processing date basis can move transactions between cycles and affect milestone accumulation.</td>
+    </tr>
+  </tbody>
+</table>
+
+</Card>
 
 # Stage 4.3 — Offer Calculation Rule
 
@@ -173,14 +451,58 @@ The Calculation Rule represents the core customer promise, including the thresho
 
 All allowed changes in this section apply from the **next cycle**.
 
-| Field / Change | Decision | Cycle | Reason |
-|---|---|---|---|
-| **Rule Type Change — Flat → Slab, etc.** | **Not Allowed** | — | Uses a different computation engine and input structure. |
-| **Value Inputs Within the Same Rule Type** | **Allowed** | **Next Cycle** | Allows changes to values such as threshold, reward amount, percentage, and minimum/maximum values while protecting the current cycle. |
-| **Probabilistic Distribution — Add / Remove Levels** | **Allowed** | **Next Cycle** | Changes the reward distribution structure. |
-| **Skip Cashback Capping — Program / Transaction / MCC / MID** | **Allowed** | **Next Cycle** | Keeps the calculation configuration consistent for the new cycle. |
-| **Allow Reversal** | **Allowed** | **Next Cycle** | Keeps the calculation configuration consistent for the new cycle. |
-| **Funding Account** | **Not Allowed** | — | Changes where the money comes from. Financial infrastructure is set at creation. |
+<Card title="Offer Calculation Rule">
+
+<table style={{ width: "100%", borderCollapse: "collapse" }}>
+  <thead>
+    <tr>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Field / Change</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Decision</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Cycle</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Rule Type Change — Flat → Slab, etc.</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>—</td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Uses a different computation engine and input structure.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Value Inputs Within the Same Rule Type</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Next Cycle</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Allows changes to values such as threshold, reward amount, percentage, and minimum/maximum values while protecting the current cycle.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Probabilistic Distribution — Add / Remove Levels</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Next Cycle</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Changes the reward distribution structure.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Skip Cashback Capping — Program / Transaction / MCC / MID</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Next Cycle</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Keeps the calculation configuration consistent for the new cycle.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Allow Reversal</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Next Cycle</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Keeps the calculation configuration consistent for the new cycle.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Funding Account</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>—</td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Changes where the money comes from. Financial infrastructure is set at creation.</td>
+    </tr>
+  </tbody>
+</table>
+
+</Card>
 
 # Stage 4.4 — Usage Limits
 
@@ -188,16 +510,70 @@ Usage Limits define how many times or how much a customer can earn per cycle.
 
 All changes in this section apply from the **next cycle**.
 
-| Field / Change | Decision | Cycle | Reason |
-|---|---|---|---|
-| **Duration — Month → Quarter** | **Allowed** | **Next Cycle** | Changes the accumulation window. |
-| **Raise Count** | **Allowed** | **Next Cycle** | Keeps the usage-limit configuration consistent for the new cycle. |
-| **Lower Count** | **Allowed** | **Next Cycle** | Protects the customer's current-cycle earning cap. |
-| **Raise Amount** | **Allowed** | **Next Cycle** | Keeps the usage-limit configuration consistent for the new cycle. |
-| **Lower Amount** | **Allowed** | **Next Cycle** | Protects the customer's current-cycle earning cap. |
-| **Change Condition Type** | **Allowed** | **Next Cycle** | Changes what is being measured. |
-| **Add Limit Row** | **Allowed** | **Next Cycle** | Adds an additional cap. |
-| **Remove Limit Row** | **Allowed** | **Next Cycle** | Removes a cap from the next cycle. |
+<Card title="Usage Limits">
+
+<table style={{ width: "100%", borderCollapse: "collapse" }}>
+  <thead>
+    <tr>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Field / Change</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Decision</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Cycle</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Duration — Month → Quarter</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Next Cycle</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Changes the accumulation window.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Raise Count</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Next Cycle</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Keeps the usage-limit configuration consistent for the new cycle.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Lower Count</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Next Cycle</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Protects the customer's current-cycle earning cap.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Raise Amount</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Next Cycle</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Keeps the usage-limit configuration consistent for the new cycle.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Lower Amount</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Next Cycle</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Protects the customer's current-cycle earning cap.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Change Condition Type</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Next Cycle</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Changes what is being measured.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Add Limit Row</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Next Cycle</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Adds an additional cap.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Remove Limit Row</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Next Cycle</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Removes a cap from the next cycle.</td>
+    </tr>
+  </tbody>
+</table>
+
+</Card>
 
 # Stage 4.5 — Posting
 
@@ -207,17 +583,66 @@ Posting is configured once at offer creation.
 
 If the setup is incorrect, the correct path is to **expire the offer and create a new one**.
 
-| Field / Change | Decision | Reason |
-|---|---|---|
-| **Enable / Disable Posting** | **Not Allowed** | Posting is delivery infrastructure set at creation. |
-| **Posting Eligibility — Account Status** | **Not Allowed** | Changing eligibility mid-offer can create inconsistency between rewards posted under V1 and V2. |
-| **Posting Eligibility — Account Smart Tag** | **Not Allowed** | Changing the Smart Tag filter can create inconsistency in which rewards are delivered. |
-| **Posting Eligibility — Account Block Code** | **Not Allowed** | Block codes are compliance controls set at creation. |
-| **Posting Timing** | **Not Allowed** | Changes reward delivery timing. |
-| **Posting Frequency** | **Not Allowed** | Changes reward delivery frequency. |
-| **Reward Points Expiry** | **Not Allowed** | Affects already-posted rewards and can create inconsistency. |
-| **Posting Narration** | **Allowed** | Non-financial text on the customer's statement. |
-| **Reversal Narration** | **Allowed** | Non-financial text shown when rewards are reversed. |
+<Card title="Posting">
+
+<table style={{ width: "100%", borderCollapse: "collapse" }}>
+  <thead>
+    <tr>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Field / Change</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Decision</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Enable / Disable Posting</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Posting is delivery infrastructure set at creation.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Posting Eligibility — Account Status</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Changing eligibility mid-offer can create inconsistency between rewards posted under V1 and V2.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Posting Eligibility — Account Smart Tag</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Changing the Smart Tag filter can create inconsistency in which rewards are delivered.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Posting Eligibility — Account Block Code</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Block codes are compliance controls set at creation.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Posting Timing</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Changes reward delivery timing.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Posting Frequency</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Changes reward delivery frequency.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Reward Points Expiry</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Affects already-posted rewards and can create inconsistency.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Posting Narration</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Non-financial text on the customer's statement.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Reversal Narration</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Non-financial text shown when rewards are reversed.</td>
+    </tr>
+  </tbody>
+</table>
+
+</Card>
 
 # Stage 5 — Display Elements
 
@@ -225,23 +650,46 @@ All Display Elements are non-financial. They control what the customer sees in t
 
 Display Elements do not affect reward calculation, enrollment, or posting logic.
 
-| Field / Change | Decision | Reason |
-|---|---|---|
-| **Labels, Display Title, Description** | **Allowed** | Controls visual and descriptive content. |
-| **Display Order, Color** | **Allowed** | Controls visual presentation and branding. |
-| **Offer / Merchant Logo, Background** | **Allowed** | Controls visual branding. |
-| **Section Details, CTA Button, Link** | **Allowed** | Controls offer detail page content. |
-| **Advanced Settings** | **Allowed** | Controls display configuration. |
+<Card title="Display Elements">
 
-# Stage 6 — Communication
+<table style={{ width: "100%", borderCollapse: "collapse" }}>
+  <thead>
+    <tr>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Field / Change</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Decision</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Labels, Display Title, Description</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Controls visual and descriptive content.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Display Order, Color</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Controls visual presentation and branding.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Offer / Merchant Logo, Background</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Controls visual branding.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Section Details, CTA Button, Link</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Controls offer detail page content.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Advanced Settings</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Controls display configuration.</td>
+    </tr>
+  </tbody>
+</table>
 
-All Communication configurations are non-financial. They control how and when the bank notifies customers about the offer.
-
-| Field / Change | Decision | Reason |
-|---|---|---|
-| **Event Triggers** | **Allowed** | Defines which events trigger notifications. |
-| **Message Content** | **Allowed** | Allows the bank to update customer messaging. |
-| **Channel — SMS / Push / Email** | **Allowed** | Allows the bank to update its communication strategy. |
+</Card>
 
 ## How Milestone Offer Versioning Works — Step by Step
 
