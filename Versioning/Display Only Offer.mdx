@@ -3,62 +3,237 @@ title: Display Only Offer — Versioning
 description: Understand the changes that can be made to a live Display Only Offer through versioning.
 ---
 
-# Display Only Offer — Versioning
-
 For a **Display Only Offer**, versioning ensures that changes to customer-facing content and configuration are made in a controlled and auditable manner. Once the offer is live, changes are made through a new version and follow the applicable approval process.
 
 ## 1. Offer Type & Structural Fields
 
-| Change | Decision | Reason |
-|---|---|---|
-| Offer Type | **Not Allowed** | Different offer types use different processing engines. Changing the Offer Type would effectively create a different offer. |
-| Eligibility Level | **Not Allowed** | Enrollment records are built based on this configuration. |
-| Issuer | **Not Allowed** | Changing the issuer creates a cross-issuer configuration risk. |
-| Program Type | **Not Allowed** | Changes the underlying processing pipeline. |
+<Card title="Offer Type & Structural Fields">
+
+<table style={{ width: "100%", borderCollapse: "collapse" }}>
+  <thead>
+    <tr>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Change</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Decision</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Offer Type</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Different offer types use different processing engines. Changing the Offer Type would effectively create a different offer.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Eligibility Level</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Enrollment records are built based on this configuration.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Issuer</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Changing the issuer creates a cross-issuer configuration risk.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Program Type</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Changes the underlying processing pipeline.</td>
+    </tr>
+  </tbody>
+</table>
+
+</Card>
 
 ## 2. Basic Details & Offer Scope
 
-| Change | Decision | Reason |
-|---|---|---|
-| Offer Name | **Allowed — On V2 Approval** | Internal text. No customer impact. |
-| Offer Description | **Allowed — On V2 Approval** | Internal text. |
-| Offer Duration — Extend | **Allowed — On V2 Approval** | Offer remains visible for a longer period. No negative impact. |
-| Offer Duration — Shorten | **Allowed — On V2 Approval with Warning** | The system warns that the offer end date is being shortened and that customers currently viewing the offer may have noted the original end date. The checker reviews the change. |
-| Program — Add New | **Allowed — On V2 Approval** | More customers can see the offer. No existing customers are affected. |
-| Program — Remove Existing | **Not Allowed** | Customers on this program may be actively viewing the offer. Removing the program cuts their access. A new offer without this program is the correct path. |
+<Card title="Basic Details & Offer Scope">
+
+<table style={{ width: "100%", borderCollapse: "collapse" }}>
+  <thead>
+    <tr>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Change</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Decision</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Offer Name</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed — On V2 Approval</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Internal text. No customer impact.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Offer Description</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed — On V2 Approval</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Internal text.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Offer Duration — Extend</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed — On V2 Approval</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Offer remains visible for a longer period. No negative impact.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Offer Duration — Shorten</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="yellow">Allowed — On V2 Approval with Warning</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>The system warns that the offer end date is being shortened and that customers currently viewing the offer may have noted the original end date. The checker reviews the change.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Program — Add New</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed — On V2 Approval</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>More customers can see the offer. No existing customers are affected.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Program — Remove Existing</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Customers on this program may be actively viewing the offer. Removing the program cuts their access. A new offer without this program is the correct path.</td>
+    </tr>
+  </tbody>
+</table>
+
+</Card>
 
 ## 3. Set-Up Offer — User Base
 
-| Change | Decision | Reason |
-|---|---|---|
-| Static ↔ Dynamic | **Not Allowed** | Static and Dynamic use different enrollment engines and data structures. |
-| Opt-In ↔ Smart Tag Attachment | **Not Allowed** | Different enrollment mechanisms. |
-| Static — Add Members | **Allowed — On V2 Approval** | Expands the audience that can see the offer. |
-| Static — Remove Members | **Not Allowed** | Removes access for customers who may currently be viewing the offer. |
-| Dynamic — Add Smart Tag | **Allowed — On V2 Approval** | Allows additional segments to see the offer. |
-| Dynamic — Remove Smart Tag | **Not Allowed** | Removes visibility for customers associated with the Smart Tag. |
-| Eligibility Criteria — Add | **Allowed — On V2 Approval** | Allows the bank to refine or expand the target audience. |
+<Card title="Set-Up Offer — User Base">
+
+<table style={{ width: "100%", borderCollapse: "collapse" }}>
+  <thead>
+    <tr>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Change</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Decision</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Static ↔ Dynamic</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Static and Dynamic use different enrollment engines and data structures.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Opt-In ↔ Smart Tag Attachment</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Different enrollment mechanisms.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Static — Add Members</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed — On V2 Approval</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Expands the audience that can see the offer.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Static — Remove Members</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Removes access for customers who may currently be viewing the offer.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Dynamic — Add Smart Tag</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed — On V2 Approval</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Allows additional segments to see the offer.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Dynamic — Remove Smart Tag</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Removes visibility for customers associated with the Smart Tag.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Eligibility Criteria — Add</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed — On V2 Approval</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Allows the bank to refine or expand the target audience.</td>
+    </tr>
+  </tbody>
+</table>
+
+</Card>
 
 ## 4. Home Display
 
-| Change | Decision | Reason |
-|---|---|---|
-| Labels | **Allowed — On V2 Approval** | Visual only. |
-| Display Title | **Allowed — On V2 Approval** | Controls the offer title shown to customers. |
-| Display Description | **Allowed — On V2 Approval** | Controls the offer summary shown to customers. |
-| Display Order | **Allowed — On V2 Approval** | Controls the position of the offer in the offer list. |
-| Display Color | **Allowed — On V2 Approval** | Visual branding only. |
-| Offer / Merchant Logo | **Allowed — On V2 Approval** | Visual branding only. |
-| Background Illustration | **Allowed — On V2 Approval** | Visual branding only. |
+<Card title="Home Display">
+
+<table style={{ width: "100%", borderCollapse: "collapse" }}>
+  <thead>
+    <tr>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Change</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Decision</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Labels</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed — On V2 Approval</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Visual only.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Display Title</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed — On V2 Approval</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Controls the offer title shown to customers.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Display Description</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed — On V2 Approval</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Controls the offer summary shown to customers.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Display Order</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed — On V2 Approval</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Controls the position of the offer in the offer list.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Display Color</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed — On V2 Approval</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Visual branding only.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Offer / Merchant Logo</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed — On V2 Approval</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Visual branding only.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Background Illustration</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed — On V2 Approval</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Visual branding only.</td>
+    </tr>
+  </tbody>
+</table>
+
+</Card>
 
 ## 5. Offer Details Page
 
-| Change | Decision | Reason |
-|---|---|---|
-| T&C / Rich Text Content | **Allowed — On V2 Approval** | Any change to live T&C content must go through V2. The system provides a diff view and retains the previous version for audit and dispute resolution. |
-| CTA Button Text | **Allowed — On V2 Approval** | Non-financial but customer-facing content. |
-| Redirection Link | **Allowed — On V2 Approval** | Customer-facing link. Checker review is required because an incorrect link can direct customers to the wrong page. |
-| Advanced Settings | **Allowed — On V2 Approval** | Display configuration. |
+<Card title="Offer Details Page">
+
+<table style={{ width: "100%", borderCollapse: "collapse" }}>
+  <thead>
+    <tr>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Change</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Decision</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>T&C / Rich Text Content</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed — On V2 Approval</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Any change to live T&C content must go through V2. The system provides a diff view and retains the previous version for audit and dispute resolution.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>CTA Button Text</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed — On V2 Approval</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Non-financial but customer-facing content.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Redirection Link</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed — On V2 Approval</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Customer-facing link. Checker review is required because an incorrect link can direct customers to the wrong page.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Advanced Settings</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed — On V2 Approval</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Display configuration.</td>
+    </tr>
+  </tbody>
+</table>
+
+</Card>
 
 ## How Display Only Versioning Works — Step by Step
 
