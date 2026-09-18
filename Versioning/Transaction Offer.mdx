@@ -43,8 +43,6 @@ For a Transactional Offer, versioning supports changes to specific **offer, elig
 
 Configurations that represent the underlying offer structure or restricted processing behaviour cannot be modified through versioning. 
 
-## Versioning Classification
-
 <Card title="Versioning Classification">
 
 <table style={{ width: "100%", borderCollapse: "collapse" }}>
@@ -88,9 +86,35 @@ Configurations that represent the underlying offer structure or restricted proce
 
 <Card title="Offer Type">
 
-| Field | Decision | Reason |
-| --- | --- | --- |
-| **Offer Type** | <Badge color="green">Not Allowed</Badge> | Each offer type, such as Transaction, Milestone, Gamified, and EMI, uses a different processing engine. The data schema, calculation logic, and enrollment model are fundamentally different. Changing the offer type is equivalent to creating a new offer from scratch. |
+<table style={{ width: "100%", borderCollapse: "collapse" }}>
+  <thead>
+    <tr>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>
+        Field
+      </th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>
+        Decision
+      </th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>
+        Reason
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>
+        <strong>Offer Type</strong>
+      </td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>
+        <Badge color="red">Not Allowed</Badge>
+      </td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>
+        Each offer type, such as Transaction, Milestone, Gamified, and EMI, uses a different processing engine. The data schema, calculation logic, and enrollment model are fundamentally different. Changing the offer type is equivalent to creating a new offer from scratch.
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 </Card>
 
@@ -100,9 +124,35 @@ Configurations that represent the underlying offer structure or restricted proce
 
 <Card title="Outcome Type">
 
-| Field | Decision | Reason |
-| --- | --- | --- |
-| **Outcome Type** | <Badge color="red">Not Allowed</Badge> | Each outcome type, such as Cashback, Reward, and Voucher, uses a different ledger and disbursement mechanism. Cashback credits the statement, Reward points go to a loyalty ledger, and Vouchers generate external codes. This is a core structural change. |
+<table style={{ width: "100%", borderCollapse: "collapse" }}>
+  <thead>
+    <tr>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>
+        Field
+      </th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>
+        Decision
+      </th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>
+        Reason
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>
+        <strong>Outcome Type</strong>
+      </td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>
+        <Badge color="red">Not Allowed</Badge>
+      </td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>
+        Each outcome type, such as Cashback, Reward, and Voucher, uses a different ledger and disbursement mechanism. Cashback credits the statement, Reward points go to a loyalty ledger, and Vouchers generate external codes. This is a core structural change.
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 </Card>
 
@@ -112,19 +162,80 @@ Configurations that represent the underlying offer structure or restricted proce
 
 <Card title="Offer Scope">
 
-| Field / Change | Decision | Reason |
-| --- | --- | --- |
-| **Eligibility Level** | <Badge color="red">Not Allowed</Badge> | All enrollment records are built on this setting, such as Account Level or Customer Level. Switching the setting invalidates existing enrollment data. |
-| **Issuer** | <Badge color="red">Not Allowed</Badge> | Ledger accounts, compliance rules, and funding sources are different across issuers. |
-| **Program Type** | <Badge color="red">Not Allowed</Badge> | Defines the card product category and the associated transaction processing pipeline. |
-| **Program — Remove Existing** | <Badge color="red">Not Allowed</Badge> | Customers on the removed program are actively enrolled and earning. Removing the program cuts their access immediately. |
-| **Offer Name** | <Badge color="green">Allowed</Badge> | Non-financial text that can be updated to correct a typo or update the offer name. |
-| **Offer Description** | <Badge color="green">Allowed</Badge> | Non-financial descriptive information that can be updated to reflect changes. |
-| **Offer Duration — Extend** | <Badge color="green">Allowed</Badge> | Gives customers more time with the offer. |
-| **Offer Duration — Shorten** | <Badge color="yellow">Allowed with confirmation</Badge> | Ends the offer earlier. A confirmation is shown because enrolled customers will have less time. |
-| **Program — Add New** | <Badge color="green">Allowed</Badge> | Allows an additional program to be associated with the existing offer. More customers become eligible without affecting existing customers. |
+<table style={{ width: "100%", borderCollapse: "collapse" }}>
+  <thead>
+    <tr>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>
+        Field / Change
+      </th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>
+        Decision
+      </th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>
+        Reason
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Eligibility Level</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>All enrollment records are built on this setting, such as Account Level or Customer Level. Switching the setting invalidates existing enrollment data.</td>
+    </tr>
+
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Issuer</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Ledger accounts, compliance rules, and funding sources are different across issuers.</td>
+    </tr>
+
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Program Type</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Defines the card product category and the associated transaction processing pipeline.</td>
+    </tr>
+
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Program — Remove Existing</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Customers on the removed program are actively enrolled and earning. Removing the program cuts their access immediately.</td>
+    </tr>
+
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Offer Name</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Non-financial text that can be updated to correct a typo or update the offer name.</td>
+    </tr>
+
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Offer Description</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Non-financial descriptive information that can be updated to reflect changes.</td>
+    </tr>
+
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Offer Duration — Extend</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Gives customers more time with the offer.</td>
+    </tr>
+
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Offer Duration — Shorten</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="yellow">Allowed with confirmation</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Ends the offer earlier. A confirmation is shown because enrolled customers will have less time.</td>
+    </tr>
+
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Program — Add New</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Allows an additional program to be associated with the existing offer. More customers become eligible without affecting existing customers.</td>
+    </tr>
+  </tbody>
+</table>
 
 </Card>
+
 ---
 
 # Stage 4.1 — User Base
@@ -144,10 +255,47 @@ The underlying data schemas are different. Switching between these configuration
 
 <Card title="Static and Dynamic User Base">
 
-| Change | Decision | Reason |
-| --- | --- | --- |
-| **Static → Dynamic** | <Badge color="red">Not Allowed</Badge> | Changes the enrollment engine and underlying data schema. |
-| **Dynamic → Static** | <Badge color="red">Not Allowed</Badge> | Changes the enrollment engine and underlying data schema. |
+<table style={{ width: "100%", borderCollapse: "collapse" }}>
+  <thead>
+    <tr>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>
+        Change
+      </th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>
+        Decision
+      </th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>
+        Reason
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>
+        <strong>Static → Dynamic</strong>
+      </td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>
+        <Badge color="red">Not Allowed</Badge>
+      </td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>
+        Changes the enrollment engine and underlying data schema.
+      </td>
+    </tr>
+
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>
+        <strong>Dynamic → Static</strong>
+      </td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>
+        <Badge color="red">Not Allowed</Badge>
+      </td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>
+        Changes the enrollment engine and underlying data schema.
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 </Card>
 
@@ -275,24 +423,83 @@ All fields in this section are editable in V2.
 
 <Card title="Transaction Eligibility">
 
-| Field / Change | Decision | Reason |
-| --- | --- | --- |
-| **Add MCC / MID / TID** | <Badge color="green">Allowed</Badge> | More transactions qualify. No customer is affected. |
-| **Remove MCC / MID / TID** | <Badge color="green">Allowed</Badge> | There is no counter or accumulated progress. The next transaction at the removed MCC does not earn. |
-| **Add POS Entry Mode** | <Badge color="green">Allowed</Badge> | More ways to transact qualify. |
-| **Remove POS Entry Mode** | <Badge color="green">Allowed</Badge> | The next transaction through the removed mode does not earn. |
-| **Add Transaction Type** | <Badge color="green">Allowed</Badge> | More activity types qualify. |
-| **Remove Transaction Type** | <Badge color="green">Allowed</Badge> | The next transaction of the removed type does not earn. |
-| **Add Sovereignty Indicator** | <Badge color="green">Allowed</Badge> | Adds another transaction classification. |
-| **Remove Sovereignty Indicator** | <Badge color="green">Allowed</Badge> | Represents the bank's operational decision. |
-| **Add Transaction Code** | <Badge color="green">Allowed</Badge> | More transaction codes qualify. |
-| **Remove Transaction Code** | <Badge color="green">Allowed</Badge> | Represents the bank's operational decision. |
-| **Transaction Value — Raise Minimum** | <Badge color="green">Allowed</Badge> | Represents the bank's financial control. |
-| **Transaction Value — Lower Minimum** | <Badge color="green">Allowed</Badge> | Allows more transactions to qualify. |
-| **Date for Processing** | <Badge color="green">Allowed</Badge> | Each transaction is independent and no accumulation window is affected. |
+<table style={{ width: "100%", borderCollapse: "collapse" }}>
+  <thead>
+    <tr>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Field / Change</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Decision</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Add MCC / MID / TID</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>More transactions qualify. No customer is affected.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Remove MCC / MID / TID</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>There is no counter or accumulated progress. The next transaction at the removed MCC does not earn.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Add POS Entry Mode</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>More ways to transact qualify.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Remove POS Entry Mode</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>The next transaction through the removed mode does not earn.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Add Transaction Type</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>More activity types qualify.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Remove Transaction Type</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>The next transaction of the removed type does not earn.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Add Sovereignty Indicator</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Adds another transaction classification.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Remove Sovereignty Indicator</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Represents the bank's operational decision.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Add Transaction Code</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>More transaction codes qualify.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Remove Transaction Code</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Represents the bank's operational decision.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Transaction Value — Raise Minimum</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Represents the bank's financial control.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Transaction Value — Lower Minimum</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Allows more transactions to qualify.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Date for Processing</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Each transaction is independent and no accumulation window is affected.</td>
+    </tr>
+  </tbody>
 
 </Card>
-
 ---
 
 # Stage 4.3 — Offer Calculation Rule
@@ -301,16 +508,57 @@ The **Rule Type** defines the underlying method used to calculate the offer outc
 
 <Card title="Offer Calculation Rule">
 
-| Field / Change | Decision | Reason |
-| --- | --- | --- |
-| **Rule Type Change — Flat → Slab, Percentage → Flat, etc.** | <Badge color="red">Not Allowed</Badge> | Flat, Slab, and Percentage use different calculation strategies, computation engines, and data schemas. Changing the rule type is equivalent to creating a new calculation from scratch. |
-| **Raise Reward Value — for example, 3 → 5 points** | <Badge color="green">Allowed</Badge> | The customer receives more per transaction. |
-| **Lower Reward Value — for example, 5 → 3 points** | <Badge color="green">Allowed</Badge> | Each transaction is independent. The customer sees the current rate, and the next transaction uses the new value. |
-| **Change "Per X Spent" Base — for example, 100 → 50** | <Badge color="green">Allowed</Badge> | Changes how frequently rewards are generated. |
-| **Skip Reward Point Capping — Turn ON** | <Badge color="green">Allowed</Badge> | Allows the offer to operate outside existing program-level caps when required for a specific campaign. |
-| **Skip Reward Point Capping — Turn OFF** | <Badge color="green">Allowed</Badge> | Allows the bank to bring the offer under program-level caps when required to control cost. |
-| **Allow Reversal — Enable** | <Badge color="green">Allowed</Badge> | Allows the bank to recover points on refunded transactions. |
-| **Allow Reversal — Disable** | <Badge color="green">Allowed</Badge> | Allows the bank to let customers retain points on refunds. |
+<table style={{ width: "100%", borderCollapse: "collapse" }}>
+  <thead>
+    <tr>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Field / Change</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Decision</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Rule Type Change — Flat → Slab, Percentage → Flat, etc.</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Flat, Slab, and Percentage use different calculation strategies, computation engines, and data schemas. Changing the rule type is equivalent to creating a new calculation from scratch.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Raise Reward Value — for example, 3 → 5 points</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>The customer receives more per transaction.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Lower Reward Value — for example, 5 → 3 points</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Each transaction is independent. The customer sees the current rate, and the next transaction uses the new value.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Change "Per X Spent" Base — for example, 100 → 50</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Changes how frequently rewards are generated.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Skip Reward Point Capping — Turn ON</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Allows the offer to operate outside existing program-level caps when required for a specific campaign.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Skip Reward Point Capping — Turn OFF</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Allows the bank to bring the offer under program-level caps when required to control cost.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Allow Reversal — Enable</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Allows the bank to recover points on refunded transactions.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Allow Reversal — Disable</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Allows the bank to let customers retain points on refunds.</td>
+    </tr>
+  </tbody>
+</table>
 
 </Card>
 
@@ -332,16 +580,57 @@ Blocking these changes would require the bank to create a new offer for every ca
 
 <Card title="Usage Limits">
 
-| Field / Change | Decision | Reason |
-| --- | --- | --- |
-| **Duration — Month → Quarter** | <Badge color="green">Allowed</Badge> | No accumulation counter is affected. The cap window changes going forward. |
-| **Raise Count — for example, 5 → 10** | <Badge color="green">Allowed</Badge> | Allows the customer to earn more times. |
-| **Lower Count — for example, 10 → 5** | <Badge color="green">Allowed</Badge> | Allows the bank to control costs. |
-| **Raise Amount — for example, 500 → 1000** | <Badge color="green">Allowed</Badge> | Allows the customer to earn more value. |
-| **Lower Amount — for example, 1000 → 500** | <Badge color="green">Allowed</Badge> | Allows the bank to control costs. |
-| **Change Condition Type — Count / Amount / Both** | <Badge color="green">Allowed</Badge> | Changes how the limit is measured. |
-| **Add New Limit Row** | <Badge color="green">Allowed</Badge> | Adds an additional usage-limit configuration. |
-| **Remove Existing Limit Row** | <Badge color="green">Allowed</Badge> | Removes an existing usage-limit configuration. |
+<table style={{ width: "100%", borderCollapse: "collapse" }}>
+  <thead>
+    <tr>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Field / Change</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Decision</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Duration — Month → Quarter</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>No accumulation counter is affected. The cap window changes going forward.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Raise Count — for example, 5 → 10</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Allows the customer to earn more times.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Lower Count — for example, 10 → 5</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Allows the bank to control costs.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Raise Amount — for example, 500 → 1000</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Allows the customer to earn more value.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Lower Amount — for example, 1000 → 500</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Allows the bank to control costs.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Change Condition Type — Count / Amount / Both</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Changes how the limit is measured.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Add New Limit Row</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Adds an additional usage-limit configuration.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Remove Existing Limit Row</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Removes an existing usage-limit configuration.</td>
+    </tr>
+  </tbody>
+</table>
 
 </Card>
 
@@ -371,16 +660,50 @@ If Posting is already enabled, the following configurations apply:
 
 <Card title="Posting">
 
-| Field / Change | Decision | Reason |
-| --- | --- | --- |
-| **Posting Eligibility — Account Status, Account Smart Tag, Account Block Code** | <Badge color="red">Not Allowed</Badge> | Only adding filters would be possible, while removing V1 filters is not safe. The limited value of add-only changes does not justify the complexity. |
-| **Posting Timing — Schedule / Post Immediately** | <Badge color="red">Not Allowed</Badge> | Changes when the customer receives the reward. |
-| **Posting Frequency — Every Transaction / Subscription Ends** | <Badge color="red">Not Allowed</Badge> | Changes how frequently rewards are posted. |
-| **Reward Points Expiry — X Days** | <Badge color="red">Not Allowed</Badge> | Changes how long posted rewards remain valid and can create inconsistency between V1 and V2 posted rewards. |
-| **Posting Narration** | <Badge color="green">Allowed</Badge> | Non-financial text displayed on the customer's statement. |
-| **Reversal Narration** | <Badge color="green">Allowed</Badge> | Non-financial text displayed when points are reversed. |
+<table style={{ width: "100%", borderCollapse: "collapse" }}>
+  <thead>
+    <tr>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Field / Change</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Decision</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Posting Eligibility — Account Status, Account Smart Tag, Account Block Code</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Only adding filters would be possible, while removing V1 filters is not safe. The limited value of add-only changes does not justify the complexity.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Posting Timing — Schedule / Post Immediately</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Changes when the customer receives the reward.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Posting Frequency — Every Transaction / Subscription Ends</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Changes how frequently rewards are posted.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Reward Points Expiry — X Days</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="red">Not Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Changes how long posted rewards remain valid and can create inconsistency between V1 and V2 posted rewards.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Posting Narration</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Non-financial text displayed on the customer's statement.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Reversal Narration</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Non-financial text displayed when points are reversed.</td>
+    </tr>
+  </tbody>
+</table>
 
 </Card>
+
 
 Posting is configured once at offer creation.
 
@@ -397,16 +720,45 @@ They control what the customer sees in the app, including titles, descriptions, 
 Display Elements do not affect reward calculation, enrollment, or posting logic.
 <Card title="Display Elements">
 
-| Field / Change | Decision | Reason |
-| --- | --- | --- |
-| **Labels, Display Title, Description** | <Badge color="green">Allowed</Badge> | Controls visual and descriptive content. |
-| **Display Order, Color** | <Badge color="green">Allowed</Badge> | Controls visual presentation and branding. |
-| **Offer / Merchant Logo, Background** | <Badge color="green">Allowed</Badge> | Controls visual branding. |
-| **Section Details, CTA Button, Link** | <Badge color="green">Allowed</Badge> | Controls the offer detail page content. |
-| **Advanced Settings** | <Badge color="green">Allowed</Badge> | Controls display configuration. |
+
+<table style={{ width: "100%", borderCollapse: "collapse" }}>
+  <thead>
+    <tr>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Field / Change</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Decision</th>
+      <th style={{ border: "1px solid #d9d9d9", padding: "12px", textAlign: "left" }}>Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Labels, Display Title, Description</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Controls visual and descriptive content.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Display Order, Color</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Controls visual presentation and branding.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Offer / Merchant Logo, Background</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Controls visual branding.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Section Details, CTA Button, Link</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Controls the offer detail page content.</td>
+    </tr>
+    <tr>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><strong>Advanced Settings</strong></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}><Badge color="green">Allowed</Badge></td>
+      <td style={{ border: "1px solid #d9d9d9", padding: "12px" }}>Controls display configuration.</td>
+    </tr>
+  </tbody>
+</table>
 
 </Card>
-
 ---
 # How Transactional Offer Versioning Works
 
